@@ -1,0 +1,42 @@
+{
+  "name": "neighborhoods/throwable-diagnostic-component",
+  "description": "Agnostic component providing recovery instructions for throwable.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Brad Wilson",
+      "email": "brad@neighborhoods.com"
+    },
+    {
+      "name": "Hrvoje Jukic",
+      "email": "hrcajuka@gmail.com"
+    },
+    {
+      "name": "Nicolas Spadavecchia",
+      "email": "nicolas.spadavecchia@virtasant.com"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "ext-pdo": "*",
+    "aws/aws-sdk-php": "^3",
+    "doctrine/dbal": "^2",
+    "neighborhoods/buphalo": "^1.1",
+    "neighborhoods/exception-component": "^1"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Neighborhoods\\ThrowableDiagnosticComponent\\": [
+        "src",
+        "fab"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\Diagnosis\FactoryInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\Diagnosis\Factory
+    public: false
+    shared: true

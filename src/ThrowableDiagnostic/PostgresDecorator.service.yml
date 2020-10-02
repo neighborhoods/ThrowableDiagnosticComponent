@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\PostgresDecoratorInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\PostgresDecorator
+    public: false
+    shared: false
+    calls:
+      - [setDiagnosisFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Diagnosis\FactoryInterface']]

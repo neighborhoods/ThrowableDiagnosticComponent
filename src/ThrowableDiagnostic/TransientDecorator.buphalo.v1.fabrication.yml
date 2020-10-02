@@ -1,0 +1,13 @@
+actors:
+  <PrimaryActorName>.php:
+    template: PrimaryActorName.php
+  <PrimaryActorName>.service.yml:
+    template: PrimaryActorName.service.yml
+  <PrimaryActorName>Interface.php:
+    template: PrimaryActorNameInterface.php
+  <PrimaryActorName>/AwareTrait.php:
+    template: PrimaryActorName/AwareTrait.php
+  <PrimaryActorName>/Factory.php:
+    template: PrimaryActorName/Factory.php
+  <PrimaryActorName>/Factory.service.yml:
+    template: PrimaryActorName/Factory.service.yml

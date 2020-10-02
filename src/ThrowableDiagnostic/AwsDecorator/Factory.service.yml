@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AwsDecorator\FactoryInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AwsDecorator\Factory
+    public: false
+    shared: true
+    calls:
+      - [setThrowableDiagnosticAwsDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AwsDecoratorInterface']]
