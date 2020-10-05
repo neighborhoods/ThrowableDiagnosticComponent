@@ -23,7 +23,7 @@ class MessageBasedDecorator implements MessageBasedDecoratorInterface
             throw $this->getDiagnosisFactory()
                 ->create()
                 ->setTransient($this->isTransient())
-                ->setThrowable($throwable);
+                ->setPrevious($throwable);
         }
 
         $this->getThrowableDiagnostic()->diagnose($throwable);

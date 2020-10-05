@@ -20,8 +20,8 @@ class ThrowableDiagnostic implements ThrowableDiagnosticInterface
         // By default consider Throwable non transient.
         throw $this->getDiagnosisFactory()
             ->create()
-            ->setThrowable($throwable)
-            ->setTransient(false);
+            ->setTransient(false)
+            ->setPrevious($throwable);
 
         return $this;
     }

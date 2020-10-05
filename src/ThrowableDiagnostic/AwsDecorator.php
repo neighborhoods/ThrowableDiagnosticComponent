@@ -20,7 +20,7 @@ class AwsDecorator implements AwsDecoratorInterface
             throw $this->getDiagnosisFactory()
                 ->create()
                 ->setTransient($transient)
-                ->setThrowable($throwable);
+                ->setPrevious($throwable);
         }
 
         $this->getThrowableDiagnostic()->diagnose($throwable);

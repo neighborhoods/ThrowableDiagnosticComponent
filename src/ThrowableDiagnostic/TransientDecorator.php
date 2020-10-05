@@ -22,8 +22,8 @@ class TransientDecorator implements TransientDecoratorInterface
         if ($throwable instanceof TransientExceptionInterface) {
             throw $this->getDiagnosisFactory()
                 ->create()
-                ->setThrowable($throwable)
-                ->setTransient(true);
+                ->setTransient(true)
+                ->setPrevious($throwable);
         }
 
         $this->getThrowableDiagnostic()->diagnose($throwable);

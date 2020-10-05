@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent;
 
-use Throwable;
+use Neighborhoods\ExceptionComponent\ExceptionInterface;
 
-interface DiagnosisInterface extends Throwable
+interface DiagnosisInterface extends ExceptionInterface
 {
     public function setTransient(bool $transient): DiagnosisInterface;
     public function isTransient(): bool;
-    public function setThrowable(Throwable $throwable): DiagnosisInterface;
-    public function getThrowable(): Throwable;
 }
