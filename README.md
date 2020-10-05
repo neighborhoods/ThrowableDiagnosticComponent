@@ -162,7 +162,7 @@ When you run buphalo you need to add the template tree contained in this package
 Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/throwable-diagnostic-component/template-tree/V1
 ```
 
-After that create the file `RiskyCode.buphalo.fabrication.v1.yml` if it doesn't already exist and make sure it has the following lines.
+After that create the file `RiskyCode.buphalo.v1.fabrication.yml` if it doesn't already exist and make sure it has the following lines.
 
 ```
 actors:
