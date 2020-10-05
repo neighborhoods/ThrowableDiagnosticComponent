@@ -24,6 +24,16 @@ Since this is a private package, neighborhoods.com must be registered as a compo
   ],
 ```
 
+### Notes for Prefab5 containers
+Add a directory path filter on /src folder to the Container Builder
+
+```
+$proteanContainerBuilder = (new Prefab5\Protean\Container\Builder());
+...
+$proteanContainerBuilder->getDiscoverableDirectories()->addDirectoryPathFilter('../vendor/neighborhoods/throwable-diagnostic-component/src');
+...
+```
+
 ## Usage
 
 When catching a `Throwable` which might be transient, use the `ThrowableDiagnostic` to `diagnose` it. A `DiagnosisInterface` will be thrown wrapping the original `Throwable`.
