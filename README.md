@@ -131,8 +131,8 @@ class Decorator implements DecoratorInterface
         if (false) {
             throw $this->getDiagnosisFactory()
                 ->create()
-                ->setThrowable($throwable)
-                ->setTransient(true);
+                ->setTransient(true)
+                ->setPrevious($throwable);
         }
 
         $this->getThrowableDiagnostic()->diagnose($throwable);

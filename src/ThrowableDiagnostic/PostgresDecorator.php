@@ -45,7 +45,7 @@ class PostgresDecorator implements PostgresDecoratorInterface
     private function throwPDODiagnosis(PDOException $PDOException): ThrowableDiagnosticInterface
     {
         throw $this->diagnoseFromExceptionMessage($PDOException->getMessage())
-            ->setThrowable($PDOException);
+            ->setPrevious($PDOException);
 
         return $this;
     }
@@ -56,13 +56,13 @@ class PostgresDecorator implements PostgresDecoratorInterface
         $PDOExceptionMessageStart = strpos($exceptionMessage, 'SQLSTATE[');
         if ($PDOExceptionMessageStart !== false) {
             throw $this->diagnoseFromExceptionMessage(substr($exceptionMessage, $PDOExceptionMessageStart))
-                ->setThrowable($DBALException);
+                ->setPrevious($DBALException);
         }
         // If the exception has an SQLSTATE, let the
         throw $this->getDiagnosisFactory()
             ->create()
-            ->setThrowable($DBALException)
-            ->setTransient($DBALException instanceof RetryableException);
+            ->setTransient($DBALException instanceof RetryableException)
+            ->setPrevious($DBALException);
 
         return $this;
     }

@@ -3,31 +3,12 @@ declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent;
 
-use Exception;
+use Neighborhoods\ExceptionComponent\Exception;
 use LogicException;
-use Throwable;
 
 class Diagnosis extends Exception implements DiagnosisInterface
 {
     private /*bool*/ $transient;
-    private /*Throwable*/ $throwable;
-
-    public function setThrowable(Throwable $throwable): DiagnosisInterface
-    {
-        if (isset($this->throwable)) {
-            throw new LogicException('Throwable is already set.');
-        }
-        $this->throwable = $throwable;
-        return $this;
-    }
-
-    public function getThrowable(): Throwable
-    {
-        if (!isset($this->throwable)) {
-            throw new LogicException('Throwable has not been set.');
-        }
-        return $this->throwable;
-    }
 
     public function setTransient(bool $transient): DiagnosisInterface
     {
