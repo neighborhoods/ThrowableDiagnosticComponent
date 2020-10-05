@@ -159,7 +159,7 @@ services:
 
 When you run buphalo you need to add the template tree contained in this package to the template tree directory paths. To do so make an export as shown below.
 ``` bash
-Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/ThrowableDiagnosticComponent/template-tree/V1
+Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/throwable-diagnostic-component/template-tree/V1
 ```
 
 After that create the file `RiskyCode.buphalo.fabrication.v1.yml` if it doesn't already exist and make sure it has the following lines.
@@ -179,11 +179,11 @@ actors:
     template: PrimaryActorName/ThrowableDiagnostic/Builder.service.yml
   <PrimaryActorName>/ThrowableDiagnostic/Builder/Factory.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
-  <PrimaryActorName>/ThrowableDiagnostic\Decorator.php:
+  <PrimaryActorName>/ThrowableDiagnostic/Decorator.php:
     template: PrimaryActorName/ThrowableDiagnostic/Decorator.php
-  <PrimaryActorName>/ThrowableDiagnostic\Decorator.service.yml:
+  <PrimaryActorName>/Throwa/home/hrvoje/Documents/Yuca/55places/InquiryService/vendor/neighborhoods/throwable-diagnostic-componentbleDiagnostic/Decorator.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Decorator.service.yml
-  <PrimaryActorName>/ThrowableDiagnostic\DecoratorInterface.php:
+  <PrimaryActorName>/ThrowableDiagnostic/DecoratorInterface.php:
     template: PrimaryActorName/ThrowableDiagnostic/DecoratorInterface.php
   <PrimaryActorName>/ThrowableDiagnostic/Decorator/Factory.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Decorator/Factory.service.yml

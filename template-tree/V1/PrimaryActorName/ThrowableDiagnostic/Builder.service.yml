@@ -5,5 +5,8 @@ services:
     shared: false
     calls:
       - [setThrowableDiagnosticFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\FactoryInterface']]
-      - [addFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\<__TODO__>Decorator\FactoryInterface']]
-      - [addFactory, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Decorator\FactoryInterface']]
+      # Add predefined decorator(s) as shown below
+      #- [addFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\<__TODO__>Decorator\FactoryInterface']]
+
+      # Uncomment next line if you have a custom decorator.
+      #- [addFactory, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Decorator\FactoryInterface']]
