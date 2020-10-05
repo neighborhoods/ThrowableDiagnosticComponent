@@ -4,4 +4,4 @@ services:
     public: false
     shared: false
     calls:
-      - [setDiagnosisFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Diagnosis\FactoryInterface']]
+      - [setDiagnosisFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\Diagnosis\FactoryInterface']]
