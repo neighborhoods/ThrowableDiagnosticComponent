@@ -24,6 +24,7 @@
     "doctrine/dbal": "^2",
     "neighborhoods/buphalo": "^1.1",
     "neighborhoods/exception-component": "^1",
+    "psr/http-client": "^1.0",
     "symfony/http-client-contracts": "^2.2"
   },
   "require-dev": {
