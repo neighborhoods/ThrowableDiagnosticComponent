@@ -191,7 +191,7 @@ actors:
     template: PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
   <PrimaryActorName>/ThrowableDiagnostic/Decorator.php:
     template: PrimaryActorName/ThrowableDiagnostic/Decorator.php
-  <PrimaryActorName>/Throwa/home/hrvoje/Documents/Yuca/55places/InquiryService/vendor/neighborhoods/throwable-diagnostic-componentbleDiagnostic/Decorator.service.yml:
+  <PrimaryActorName>/ThrowableDiagnostic/Decorator.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Decorator.service.yml
   <PrimaryActorName>/ThrowableDiagnostic/DecoratorInterface.php:
     template: PrimaryActorName/ThrowableDiagnostic/DecoratorInterface.php
