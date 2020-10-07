@@ -3,7 +3,7 @@
 A diagnostic tool for `Throwables`.  
 The `ThrowableDiagnostic` can determine if a `Throwable` happened because of a permanent or transient fault (network issues, database down, 3rd party service unavailable).  
 Every `Throwable` is by default considered permanent, but certain `Throwables` are known to be transient. By decorating the `ThrowableDiagnostic` with custom diagnostic logic such cases can be identified.  
-`Decorators` for common cases like RDBMS and AWS are available out of the box. Implementing your own `Decorator` is straightforward. Build a decorator stack tailored to your needs and handle throwables properly.
+`Decorators` for common cases like RDBMS and AWS are available out of the box. Implementing your own `Decorator` is straightforward. Build a decorator stack tailored to your needs and handle transient `Throwables` properly.
 
 ## Install
 
@@ -15,23 +15,13 @@ $ composer require neighborhoods/ThrowableDiagnosticComponent
 
 Since this is a private package, neighborhoods.com must be registered as a composer repository. Make sure your `composer.json` has a `repositories` array in the root object with an item as shown below.
 
-```
+``` json
 "repositories": [
     {
       "type": "composer",
       "url": "https://satis.neighborhoods.com"
     }
   ],
-```
-
-### Notes for Prefab5 containers
-Add a directory path filter on /src folder to the Container Builder
-
-```
-$proteanContainerBuilder = (new Prefab5\Protean\Container\Builder());
-...
-$proteanContainerBuilder->getDiscoverableDirectories()->addDirectoryPathFilter('../vendor/neighborhoods/throwable-diagnostic-component/src');
-...
 ```
 
 ## Usage
@@ -89,7 +79,7 @@ class AsyncJob {
 ```
 
 Build a decorator stack tailored to your needs. An example is shown below using Symfony services to use the Postgres and AWS decorator.
-```
+``` yaml
 # RiskyCode\ThrowableDiagnostic\Builder.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface:
@@ -99,7 +89,7 @@ services:
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AWSDecorator\FactoryInterface' ] ]
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\PostgresDecorator\FactoryInterface' ] ]
 ```
-```
+``` yaml
 # RiskyCode\ThrowableDiagnostic\Builder\Factory.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\Builder\FactoryInterface:
@@ -108,7 +98,7 @@ services:
       - [setThrowableDiagnosticBuilder, ['@Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface']]
 ```
 
-```
+``` yaml
 # RiskyCode.service.yml
 services:
   Acme\RiskyCode:
@@ -152,9 +142,20 @@ class Decorator implements DecoratorInterface
 }
 ```
 
-Create a factory for it and add it to your builder service.
-
+Use Symfony DI to inject the Diagnosis factory.
+``` yaml
+# RiskyCode\ThrowableDiagnostic\Decorator.service.yml
+services:
+  Acme\RiskyCode\ThrowableDiagnostic\DecoratorInterface:
+    class: Acme\RiskyCode\ThrowableDiagnostic\Decorator
+    calls:
+      - [setDiagnosisFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\Diagnosis\FactoryInterface']]
+      # Don't call setThrowableDiagnostic. The ThrowableDiagnostic is injected by the ThrowableDiagnostic builder.
 ```
+
+Define a decorator factory and add it to your builder service.
+
+``` yaml
 # RiskyCode\ThrowableDiagnostic\Decorator\Factory.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\Decorator\FactoryInterface:
@@ -174,7 +175,7 @@ Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTree
 
 After that create the file `RiskyCode.buphalo.v1.fabrication.yml` if it doesn't already exist and make sure it has the following lines.
 
-```
+``` yaml
 actors:
   <PrimaryActorName>/ThrowableDiagnostic/Builder.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Builder.service.yml
@@ -183,7 +184,7 @@ actors:
 ```
 If you also want a custom decorator make sure it has the following lines.
 
-``` bash
+``` yaml
 actors:
   <PrimaryActorName>/ThrowableDiagnostic/Builder.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Builder.service.yml
@@ -202,3 +203,22 @@ actors:
 ```
 
 You need to edit the `PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` and `PrimaryActorName/ThrowableDiagnostic/Decorator.php` files. Before doing so move the files from your fabrication folder to the source folder.
+
+### Protean Container
+
+When using a Symfony DI based container to resolve a service aware of the `ThrowableDiagnostic` builder factory, make sure it searches the source folder of this package.
+For the Protean Container add the directory path filter as shown below.
+
+``` php
+$proteanContainerBuilder = new Prefab5\Protean\Container\Builder();
+$proteanContainerBuilder->getDiscoverableDirectories()
+    ->addDirectoryPathFilter('../vendor/neighborhoods/throwable-diagnostic-component/src');
+// Further builder configuration
+
+$proteanContainer = $proteanContainerBuilder->build();
+$riskyCode = $proteanContainer->get(RiskyCode::class);
+
+// Risky code is using throwable diagnostic with the decorators
+// configured in the corresponding ThrowableDiagnostic builder.
+$riskyCode->run();
+```
