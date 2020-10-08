@@ -71,7 +71,7 @@ class AsyncJob {
             if ($throwable instanceof DiagnosisInterface && $throwable->isTransient()) {
                 // Retry later
             } else {
-                // Excalate
+                // Escalate
             }
         }
     }
@@ -89,6 +89,9 @@ services:
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AWSDecorator\FactoryInterface' ] ]
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\PostgresDecorator\FactoryInterface' ] ]
 ```
+
+Create a Factory for the preconfigured builder.
+
 ``` yaml
 # RiskyCode\ThrowableDiagnostic\Builder\Factory.service.yml
 services:
@@ -97,6 +100,8 @@ services:
     calls:
       - [setThrowableDiagnosticBuilder, ['@Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface']]
 ```
+
+Inject the factory into your service.
 
 ``` yaml
 # RiskyCode.service.yml
