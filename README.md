@@ -212,7 +212,8 @@ You need to edit the `PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` 
 ### Protean Container
 
 When using a Symfony DI based container to resolve a service aware of the `ThrowableDiagnostic` builder factory, make sure it searches the source folder of this package.
-For the Protean Container add the directory path filter as shown below.
+
+* For the Protean Container add the directory path filter as shown below.
 
 ``` php
 $proteanContainerBuilder = new Prefab5\Protean\Container\Builder();
@@ -227,3 +228,21 @@ $riskyCode = $proteanContainer->get(RiskyCode::class);
 // configured in the corresponding ThrowableDiagnostic builder.
 $riskyCode->run();
 ```
+
+* If you are using a [Prefab user-defined subset of containers](https://github.com/neighborhoods/Prefab/tree/feature/container_only#subset-container-buildable-directories) add the directory path filter as shown below.
+
+Prefab global config *http-buildable-directories.yml* in project root
+```yaml
+ComponentName/DAO:
+  buildable_directories:
+    - ../vendor/neighborhoods/throwable-diagnostic-component/src
+    - ComponentName
+  welcome_baskets:
+    - Doctrine\DBAL
+    - PDO
+    - Opcache
+    - NewRelic
+    - Zend\Expressive
+    - SearchCriteria
+```
+
