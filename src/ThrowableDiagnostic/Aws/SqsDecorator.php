@@ -1,21 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
+namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws;
 
-use Aws\Exception\AwsException;
+use Aws\Sqs\Exception\SqsException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
-class AwsDecorator implements AwsDecoratorInterface
+class SqsDecorator implements SqsDecoratorInterface
 {
-    use AwareTrait;
+    use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
-        if ($throwable instanceof AwsException) {
+        if ($throwable instanceof SqsException) {
             $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
             throw $this->getDiagnosedFactory()
                 ->create()

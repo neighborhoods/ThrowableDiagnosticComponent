@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\S3DecoratorInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\S3Decorator
+    public: false
+    shared: false

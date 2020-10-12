@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AwsDecorator;
+namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\Decorator;
 
 use LogicException;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AwsDecoratorInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\DecoratorInterface;
 
 trait AwareTrait
 {
     protected $ThrowableDiagnosticAwsDecorator;
 
-    public function setThrowableDiagnosticAwsDecorator(AwsDecoratorInterface $AwsDecorator): self
+    public function setThrowableDiagnosticAwsDecorator(DecoratorInterface $AwsDecorator): self
     {
         if ($this->hasThrowableDiagnosticAwsDecorator()) {
             throw new LogicException('ThrowableDiagnosticAwsDecorator is already set.');
@@ -20,7 +20,7 @@ trait AwareTrait
         return $this;
     }
 
-    protected function getThrowableDiagnosticAwsDecorator(): AwsDecoratorInterface
+    protected function getThrowableDiagnosticAwsDecorator(): DecoratorInterface
     {
         if (!$this->hasThrowableDiagnosticAwsDecorator()) {
             throw new LogicException('ThrowableDiagnosticAwsDecorator is not set.');

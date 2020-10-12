@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\SnsDecorator\FactoryInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\SnsDecorator\Factory
+    public: false
+    shared: true
+    calls:
+      - [setThrowableDiagnosticAwsSnsDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\SnsDecoratorInterface']]
