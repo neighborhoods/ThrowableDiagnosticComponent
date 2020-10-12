@@ -15,7 +15,7 @@ class PrimaryActorName implements PrimaryActorNameInterface
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
-        /** @neighborhoods-buphalo:annotation-processor Neighborhoods\BuphaloTemplateTree\ThrowableDiagnostic\Decorator.diagnose
+        /** @neighborhoods-buphalo:annotation-processor Neighborhoods\BuphaloTemplateTree\ThrowableDiagnostic\Decorator\PrimaryActorName.diagnose
         // TODO: Implement diagnose() method.
         throw new \LogicException('Unimplemented custom diagnostic.');
          */
