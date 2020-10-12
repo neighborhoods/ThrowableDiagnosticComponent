@@ -1,8 +1,8 @@
 {
   "name": "neighborhoods/throwable-diagnostic-component",
-  "description": "Agnostic component providing recovery instructions for throwable.",
+  "description": "A Service Agnostic Component for diagnosing Throwables.",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Brad Wilson",
@@ -14,7 +14,7 @@
     },
     {
       "name": "Nicolas Spadavecchia",
-      "email": "nicolas.spadavecchia@virtasant.com"
+      "email": "ingspadavecchia@gmail.com"
     }
   ],
   "require": {
