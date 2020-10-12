@@ -187,24 +187,20 @@ actors:
   <PrimaryActorName>/ThrowableDiagnostic/Builder/Factory.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
 ```
-If you also want a custom decorator make sure it has the following lines.
+If you also want a custom decorator add the `CustomDecoratorName.buphalo.v1.fabrication.yml` file with the content below. Preferably into the `ThrowableDiagnostic` subdirectory, next to the `Builder.service.yml` using it.
 
 ``` yaml
 actors:
-  <PrimaryActorName>/ThrowableDiagnostic/Builder.service.yml:
-    template: PrimaryActorName/ThrowableDiagnostic/Builder.service.yml
-  <PrimaryActorName>/ThrowableDiagnostic/Builder/Factory.service.yml:
-    template: PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
-  <PrimaryActorName>/ThrowableDiagnostic/Decorator.php:
-    template: PrimaryActorName/ThrowableDiagnostic/Decorator.php
-  <PrimaryActorName>/ThrowableDiagnostic/Decorator.service.yml:
-    template: PrimaryActorName/ThrowableDiagnostic/Decorator.service.yml
-  <PrimaryActorName>/ThrowableDiagnostic/DecoratorInterface.php:
-    template: PrimaryActorName/ThrowableDiagnostic/DecoratorInterface.php
-  <PrimaryActorName>/ThrowableDiagnostic/Decorator/Factory.service.yml:
-    template: PrimaryActorName/ThrowableDiagnostic/Decorator/Factory.service.yml
-  <PrimaryActorName>/ThrowableDiagnostic/Decorator/Factory.php:
-    template: PrimaryActorName/ThrowableDiagnostic/Decorator/Factory.php
+  <PrimaryActorName>.php:
+    template: ThrowableDiagnostic/Decorator/PrimaryActorName.php
+  <PrimaryActorName>.service.yml:
+    template: ThrowableDiagnostic/Decorator/PrimaryActorName.service.yml
+  <PrimaryActorName>Interface.php:
+    template: ThrowableDiagnostic/Decorator/PrimaryActorNameInterface.php
+  <PrimaryActorName>/Factory.php:
+    template: ThrowableDiagnostic/Decorator/PrimaryActorName/Factory.php
+  <PrimaryActorName>/Factory.service.yml:
+    template: ThrowableDiagnostic/Decorator/PrimaryActorName/Factory.service.yml
 ```
 
 You need to edit the `PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` and `PrimaryActorName/ThrowableDiagnostic/Decorator.php` files. Before doing so move the files from your fabrication folder to the source folder.

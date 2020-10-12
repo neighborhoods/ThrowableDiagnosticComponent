@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic;
+namespace Neighborhoods\BuphaloTemplateTree;
 
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\DecoratorInterface as ThrowableDiagnosticDecoratorInterface;
 
-interface DecoratorInterface extends ThrowableDiagnosticDecoratorInterface
+interface PrimaryActorNameInterface extends ThrowableDiagnosticDecoratorInterface
 {
 
 }

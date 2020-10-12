@@ -1,7 +1,0 @@
-services:
-  Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Decorator\FactoryInterface:
-    class: Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Decorator\Factory
-    public: false
-    shared: true
-    calls:
-      - [setThrowableDiagnosticDecorator, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\DecoratorInterface']]
