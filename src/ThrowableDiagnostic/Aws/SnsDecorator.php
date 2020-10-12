@@ -9,7 +9,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
-class SnsDecorator implements SnsDecoratorInterface
+final class SnsDecorator implements SnsDecoratorInterface
 {
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;

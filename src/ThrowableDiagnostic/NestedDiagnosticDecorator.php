@@ -8,7 +8,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
-class NestedDiagnosticDecorator implements NestedDiagnosticDecoratorInterface
+final class NestedDiagnosticDecorator implements NestedDiagnosticDecoratorInterface
 {
     use AwareTrait;
     use Diagnosed\Factory\AwareTrait;

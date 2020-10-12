@@ -11,7 +11,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use PDOException;
 use Throwable;
 
-class PostgresDecorator implements PostgresDecoratorInterface
+final class PostgresDecorator implements PostgresDecoratorInterface
 {
     const TRANSIENT_SQL_STATES = [
         '40001',
@@ -67,7 +67,7 @@ class PostgresDecorator implements PostgresDecoratorInterface
         return $this;
     }
 
-    public function diagnoseFromExceptionMessage(string $exceptionMessage): DiagnosedInterface
+    private function diagnoseFromExceptionMessage(string $exceptionMessage): DiagnosedInterface
     {
         $transient = false;
 

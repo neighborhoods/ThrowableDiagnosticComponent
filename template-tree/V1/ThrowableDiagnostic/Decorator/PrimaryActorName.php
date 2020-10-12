@@ -8,7 +8,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Throwable;
 
-class PrimaryActorName implements PrimaryActorNameInterface
+final class PrimaryActorName implements PrimaryActorNameInterface
 {
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;

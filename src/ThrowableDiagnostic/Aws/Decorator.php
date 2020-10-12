@@ -9,7 +9,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
-class Decorator implements DecoratorInterface
+final class Decorator implements DecoratorInterface
 {
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;

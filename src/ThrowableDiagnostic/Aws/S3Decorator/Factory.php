@@ -6,7 +6,7 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\S3D
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Decorator\FactoryInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\DecoratorInterface;
 
-class Factory implements FactoryInterface
+final class Factory implements FactoryInterface
 {
     use AwareTrait;
 

@@ -8,7 +8,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Psr\Http\Client\NetworkExceptionInterface;
 use Throwable;
 
-class Psr18Decorator implements Psr18DecoratorInterface
+final class Psr18Decorator implements Psr18DecoratorInterface
 {
     use AwareTrait;
     use Diagnosed\Factory\AwareTrait;

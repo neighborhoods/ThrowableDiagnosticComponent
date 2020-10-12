@@ -8,7 +8,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Throwable;
 
-class SymfonyHttpClientDecorator implements SymfonyHttpClientDecoratorInterface
+final class SymfonyHttpClientDecorator implements SymfonyHttpClientDecoratorInterface
 {
     use AwareTrait;
     use Diagnosed\Factory\AwareTrait;

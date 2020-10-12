@@ -6,7 +6,7 @@ namespace Neighborhoods\ThrowableDiagnosticComponent;
 use LogicException;
 use Throwable;
 
-class ThrowableDiagnostic implements ThrowableDiagnosticInterface
+final class ThrowableDiagnostic implements ThrowableDiagnosticInterface
 {
     use Diagnosed\Factory\AwareTrait;
 

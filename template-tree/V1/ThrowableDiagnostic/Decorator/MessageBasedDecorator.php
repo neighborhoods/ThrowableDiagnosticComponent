@@ -9,7 +9,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Throwable;
 
-class PrimaryActorName implements PrimaryActorNameInterface
+final class PrimaryActorName implements PrimaryActorNameInterface
 {
     const TRANSIENT_MESSAGE_PART = 'TODO';
 

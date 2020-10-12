@@ -7,7 +7,7 @@ use LogicException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Decorator\FactoryInterface as DecoratorFactoryInterface;
 
-class Builder implements BuilderInterface
+final class Builder implements BuilderInterface
 {
     use Factory\AwareTrait;
 

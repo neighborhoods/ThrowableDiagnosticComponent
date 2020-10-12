@@ -8,7 +8,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
-class TransientDecorator implements TransientDecoratorInterface
+final class TransientDecorator implements TransientDecoratorInterface
 {
     use AwareTrait;
     use Diagnosed\Factory\AwareTrait;

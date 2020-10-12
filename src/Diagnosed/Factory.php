@@ -6,7 +6,7 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 
-class Factory implements FactoryInterface
+final class Factory implements FactoryInterface
 {
     public function create(): DiagnosedInterface
     {

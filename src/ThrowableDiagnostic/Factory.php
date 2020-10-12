@@ -5,7 +5,7 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 
-class Factory implements FactoryInterface
+final class Factory implements FactoryInterface
 {
     use AwareTrait;
 

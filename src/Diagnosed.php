@@ -6,7 +6,7 @@ namespace Neighborhoods\ThrowableDiagnosticComponent;
 use Neighborhoods\ExceptionComponent\Exception;
 use LogicException;
 
-class Diagnosed extends Exception implements DiagnosedInterface
+final class Diagnosed extends Exception implements DiagnosedInterface
 {
     private /*bool*/ $transient;
 
