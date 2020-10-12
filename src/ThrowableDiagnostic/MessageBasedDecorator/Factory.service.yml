@@ -1,7 +1,0 @@
-services:
-  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\MessageBasedDecorator\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\MessageBasedDecorator\Factory
-    public: false
-    shared: true
-    calls:
-      - [setThrowableDiagnosticMessageBasedDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\MessageBasedDecoratorInterface']]

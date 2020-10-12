@@ -173,12 +173,19 @@ services:
 
 [Buphalo](https://github.com/neighborhoods/Buphalo) templates are available for generating custom ThrowableDiagnostic Builders, Builder Factories, Decorators and Decorator files.
 
-When you run buphalo you need to add the template tree contained in this package to the template tree directory paths. To do so make an export as shown below.
+### Prerequisites
+
+The Buphalo templates are provided in a custom template tree. Support for multiple template trees has been added to Buphalo in version 1.1. Ensure you have Buphalo version 1.1 or above installed.  
+When you run Buphalo you need to add the template tree contained in this package to the template tree directory paths. To do so make an export as shown below.
 ``` bash
 Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/throwable-diagnostic-component/template-tree/V1
 ```
 
-After that create the file `RiskyCode.buphalo.v1.fabrication.yml` if it doesn't already exist and make sure it has the following lines.
+The export above assumes that you have no other custom template trees.
+
+### Decorator stack fabrication
+
+Create the file `RiskyCode.buphalo.v1.fabrication.yml` if it doesn't already exist and make sure it has the following lines.
 
 ``` yaml
 actors:
@@ -187,6 +194,12 @@ actors:
   <PrimaryActorName>/ThrowableDiagnostic/Builder/Factory.service.yml:
     template: PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
 ```
+
+Modify the `PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` to composes a decorator stack tailored to `RiskyCode`. Before doing so move the file from your fabrication folder to the source folder.  
+You still need to manually inject the fabricated builder factory into the aware service, e.g. `RiskyCode`.
+
+### Custom decorator fabrication
+
 If you also want a custom decorator add the `CustomDecoratorName.buphalo.v1.fabrication.yml` file with the content below. Preferably into the `ThrowableDiagnostic` subdirectory, next to the `Builder.service.yml` using it.
 
 ``` yaml
@@ -203,9 +216,16 @@ actors:
     template: ThrowableDiagnostic/Decorator/PrimaryActorName/Factory.service.yml
 ```
 
-You need to edit the `PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` and `PrimaryActorName/ThrowableDiagnostic/Decorator.php` files. Before doing so move the files from your fabrication folder to the source folder.
+Move the `PrimaryActorName/ThrowableDiagnostic/CustomDecoratorName.php` file from your fabrication folder to the source folder and write you custom diagnostic logic. 
 
-### Protean Container
+#### Decorator implementation templates
+
+Instead of the dummy decorator implementation template, more elaborate implementation templates are available. To use one of them change the template value of the `<PrimaryActorName>.php` in the `CustomDecoratorName.buphalo.v1.fabrication.yml` file.
+
+Alternatives include
+* ThrowableDiagnostic/Decorator/MessageBasedDecorator.php
+
+## Protean Container
 
 When using a Symfony DI based container to resolve a service aware of the `ThrowableDiagnostic` builder factory, make sure it searches the source folder of this package.
 
