@@ -1,8 +1,14 @@
 # Throwable Diagnostic
 
-A diagnostic tool for `Throwables`.  
-The `ThrowableDiagnostic` can determine if a `Throwable` happened because of a permanent or transient fault (network issues, database down, 3rd party service unavailable).  
+A Service Agnostic Component for diagnosing `Throwables`. 
+
+
+The `ThrowableDiagnostic` can determine if a `Throwable` happened because of a permanent or transient fault (network issues, database down, 3rd party service unavailable).
+
+
 Every `Throwable` is by default considered permanent, but certain `Throwables` are known to be transient. By decorating the `ThrowableDiagnostic` with custom diagnostic logic such cases can be identified.  
+
+
 `Decorators` for common cases like RDBMS and AWS are available out of the box. Implementing your own `Decorator` is straightforward. Build a decorator stack tailored to your needs and handle transient `Throwables` properly.
 
 ## Install
