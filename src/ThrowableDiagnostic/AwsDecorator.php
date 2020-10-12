@@ -5,19 +5,19 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
 use Aws\Exception\AwsException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
 class AwsDecorator implements AwsDecoratorInterface
 {
     use AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof AwsException) {
             $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
-            throw $this->getDiagnosisFactory()
+            throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient($transient)
                 ->setPrevious($throwable);

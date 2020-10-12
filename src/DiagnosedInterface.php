@@ -5,8 +5,8 @@ namespace Neighborhoods\ThrowableDiagnosticComponent;
 
 use Neighborhoods\ExceptionComponent\ExceptionInterface;
 
-interface DiagnosisInterface extends ExceptionInterface
+interface DiagnosedInterface extends ExceptionInterface
 {
-    public function setTransient(bool $transient): DiagnosisInterface;
+    public function setTransient(bool $transient): DiagnosedInterface;
     public function isTransient(): bool;
 }

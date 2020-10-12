@@ -5,13 +5,13 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
 use Neighborhoods\ExceptionComponent\TransientExceptionInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
 class TransientDecorator implements TransientDecoratorInterface
 {
     use AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     /**
      * @todo - consider removing this class later since the Exception Component should be replaced by
@@ -20,7 +20,7 @@ class TransientDecorator implements TransientDecoratorInterface
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof TransientExceptionInterface) {
-            throw $this->getDiagnosisFactory()
+            throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient(true)
                 ->setPrevious($throwable);

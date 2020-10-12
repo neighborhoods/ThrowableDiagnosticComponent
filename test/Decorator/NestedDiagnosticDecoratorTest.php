@@ -2,7 +2,7 @@
 
 namespace Test\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosisInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\NestedDiagnosticDecorator;
 use Throwable;
 
@@ -16,15 +16,15 @@ class NestedDiagnosticDecoratorTest extends DecoratorTestCase
 
         $this->decorator = new NestedDiagnosticDecorator();
         $this->decorator
-            ->setDiagnosisFactory($this->getDiagnosisFactoryMock())
+            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
             ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
-    public function testThrowsAnalysedDiagnosis()
+    public function testThrowsAnalysedDiagnosed()
     {
-        $analysedThrowable = $this->createMock(DiagnosisInterface::class);
+        $analysedThrowable = $this->createMock(DiagnosedInterface::class);
         $this->expectNoForwarding();
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->expectExceptionObject($analysedThrowable);
         $this->decorator->diagnose($analysedThrowable);
     }
@@ -33,7 +33,7 @@ class NestedDiagnosticDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(Throwable::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 }

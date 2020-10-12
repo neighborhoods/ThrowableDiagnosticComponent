@@ -6,8 +6,8 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception\RetryableException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosisInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
+use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use PDOException;
 use Throwable;
 
@@ -27,22 +27,22 @@ class PostgresDecorator implements PostgresDecoratorInterface
     ];
 
     use AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof PDOException) {
-            $this->throwPDODiagnosis($throwable);
+            $this->throwPDODiagnosed($throwable);
         }
         if ($throwable instanceof DBALException) {
-            $this->throwDBALDiagnosis($throwable);
+            $this->throwDBALDiagnosed($throwable);
         }
 
         $this->getThrowableDiagnostic()->diagnose($throwable);
         return $this;
     }
 
-    private function throwPDODiagnosis(PDOException $PDOException): ThrowableDiagnosticInterface
+    private function throwPDODiagnosed(PDOException $PDOException): ThrowableDiagnosticInterface
     {
         throw $this->diagnoseFromExceptionMessage($PDOException->getMessage())
             ->setPrevious($PDOException);
@@ -50,7 +50,7 @@ class PostgresDecorator implements PostgresDecoratorInterface
         return $this;
     }
 
-    private function throwDBALDiagnosis(DBALException $DBALException): ThrowableDiagnosticInterface
+    private function throwDBALDiagnosed(DBALException $DBALException): ThrowableDiagnosticInterface
     {
         $exceptionMessage = $DBALException->getMessage();
         $PDOExceptionMessageStart = strpos($exceptionMessage, 'SQLSTATE[');
@@ -59,7 +59,7 @@ class PostgresDecorator implements PostgresDecoratorInterface
                 ->setPrevious($DBALException);
         }
         // If the exception has an SQLSTATE, let the
-        throw $this->getDiagnosisFactory()
+        throw $this->getDiagnosedFactory()
             ->create()
             ->setTransient($DBALException instanceof RetryableException)
             ->setPrevious($DBALException);
@@ -67,7 +67,7 @@ class PostgresDecorator implements PostgresDecoratorInterface
         return $this;
     }
 
-    public function diagnoseFromExceptionMessage(string $exceptionMessage): DiagnosisInterface
+    public function diagnoseFromExceptionMessage(string $exceptionMessage): DiagnosedInterface
     {
         $transient = false;
 
@@ -87,7 +87,7 @@ class PostgresDecorator implements PostgresDecoratorInterface
             }
         }
 
-        return $this->getDiagnosisFactory()
+        return $this->getDiagnosedFactory()
             ->create()
             ->setTransient($transient);
     }

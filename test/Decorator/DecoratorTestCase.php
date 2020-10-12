@@ -6,6 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 class DecoratorTestCase extends TestCase
 {
-    use DiagnosisFactoryMockerTrait;
+    use DiagnosedFactoryMockerTrait;
     use ThrowableDiagnosticMockerTrait;
 }

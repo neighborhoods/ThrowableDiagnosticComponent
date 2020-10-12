@@ -23,7 +23,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
 
         $this->decorator = new SymfonyHttpClientDecorator();
         $this->decorator
-            ->setDiagnosisFactory($this->getDiagnosisFactoryMock())
+            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
             ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
@@ -31,7 +31,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(ClientExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -39,7 +39,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(DecodingExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -47,7 +47,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(ExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -55,7 +55,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(HttpExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -63,7 +63,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(RedirectionExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -71,7 +71,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(ServerExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -79,8 +79,8 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(TimeoutExceptionInterface::class);
         $this->expectNoForwarding();
-        $diagnosis = $this->expectDiagnosisCreation($analysedThrowable, true);
-        $this->expectExceptionObject($diagnosis);
+        $diagnosed = $this->expectDiagnosedCreation($analysedThrowable, true);
+        $this->expectExceptionObject($diagnosed);
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -88,8 +88,8 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(TransportExceptionInterface::class);
         $this->expectNoForwarding();
-        $diagnosis = $this->expectDiagnosisCreation($analysedThrowable, true);
-        $this->expectExceptionObject($diagnosis);
+        $diagnosed = $this->expectDiagnosedCreation($analysedThrowable, true);
+        $this->expectExceptionObject($diagnosed);
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -97,7 +97,7 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(Throwable::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic;
 
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Throwable;
@@ -11,7 +11,7 @@ use Throwable;
 class Decorator implements DecoratorInterface
 {
     use ThrowableDiagnostic\AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
@@ -20,7 +20,7 @@ class Decorator implements DecoratorInterface
         throw new \LogicException('Unimplemented custom diagnostic.');
          */
         if (false) {
-            throw $this->getDiagnosisFactory()
+            throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient(true)
                 ->setPrevious($throwable);

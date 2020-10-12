@@ -8,17 +8,17 @@ use Throwable;
 
 class ThrowableDiagnostic implements ThrowableDiagnosticInterface
 {
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
-        // Prevent wrapping of diagnosis is another diagnosis.
-        if ($throwable instanceof DiagnosisInterface) {
+        // Prevent wrapping of Diagnosed in another Diagnosed.
+        if ($throwable instanceof DiagnosedInterface) {
             throw new LogicException('Nested diagnostic detected.', 0, $throwable);
         }
 
         // By default consider Throwable non transient.
-        throw $this->getDiagnosisFactory()
+        throw $this->getDiagnosedFactory()
             ->create()
             ->setTransient(false)
             ->setPrevious($throwable);

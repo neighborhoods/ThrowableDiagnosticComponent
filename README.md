@@ -26,7 +26,7 @@ Since this is a private package, neighborhoods.com must be registered as a compo
 
 ## Usage
 
-When catching a `Throwable` which might be transient, use the `ThrowableDiagnostic` to `diagnose` it. A `DiagnosisInterface` will be thrown wrapping the original `Throwable`.
+When catching a `Throwable` which might be transient, use the `ThrowableDiagnostic` to `diagnose` it. A `DiagnosedInterface` will be thrown wrapping the original `Throwable`.
 
 ``` php
 <?php
@@ -53,13 +53,13 @@ class RiskyCode {
 }
 ```
 
-Handle the `Throwable` based on the diagnosis.
+Handle the `Throwable` based on the diagnosed.
 
 ``` php
 <?php
 namespace Acme;
 
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosisInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use Throwable;
 
 class AsyncJob {
@@ -68,7 +68,7 @@ class AsyncJob {
         try {
             (new RiskyCode())->run();
         } catch (Throwable $throwable) {
-            if ($throwable instanceof DiagnosisInterface && $throwable->isTransient()) {
+            if ($throwable instanceof DiagnosedInterface && $throwable->isTransient()) {
                 // Retry later
             } else {
                 // Escalate
@@ -119,7 +119,7 @@ To properly handle `Throwables` which are specific to your own code or a package
 <?php
 namespace Acme\RiskyCode\ThrowableDiagnostic;
 
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\DecoratorInterface;
@@ -128,13 +128,13 @@ use Throwable;
 class Decorator implements DecoratorInterface
 {
     use ThrowableDiagnostic\AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         // TODO: Implement custom diagnostic logic
         if (false) {
-            throw $this->getDiagnosisFactory()
+            throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient(true)
                 ->setPrevious($throwable);
@@ -147,14 +147,14 @@ class Decorator implements DecoratorInterface
 }
 ```
 
-Use Symfony DI to inject the Diagnosis factory.
+Use Symfony DI to inject the Diagnosed factory.
 ``` yaml
 # RiskyCode\ThrowableDiagnostic\Decorator.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\DecoratorInterface:
     class: Acme\RiskyCode\ThrowableDiagnostic\Decorator
     calls:
-      - [setDiagnosisFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\Diagnosis\FactoryInterface']]
+      - [setDiagnosedFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\Diagnosed\FactoryInterface']]
       # Don't call setThrowableDiagnostic. The ThrowableDiagnostic is injected by the ThrowableDiagnostic builder.
 ```
 

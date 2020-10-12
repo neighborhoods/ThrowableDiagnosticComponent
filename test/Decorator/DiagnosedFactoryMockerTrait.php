@@ -2,47 +2,47 @@
 
 namespace Test\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosisInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
+use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use Throwable;
 
 
-trait DiagnosisFactoryMockerTrait
+trait DiagnosedFactoryMockerTrait
 {
-    private $diagnosisFactoryMock;
+    private $diagnosedFactoryMock;
 
-    protected function getDiagnosisFactoryMock()
+    protected function getDiagnosedFactoryMock()
     {
-        if (!isset($this->diagnosisFactoryMock)) {
-            $this->diagnosisFactoryMock = $this->createMock(Diagnosis\FactoryInterface::class);
+        if (!isset($this->diagnosedFactoryMock)) {
+            $this->diagnosedFactoryMock = $this->createMock(Diagnosed\FactoryInterface::class);
         }
-        return $this->diagnosisFactoryMock;
+        return $this->diagnosedFactoryMock;
     }
 
-    protected function expectDiagnosisCreation(
+    protected function expectDiagnosedCreation(
         Throwable $previous,
         bool $transient,
         string $code = null,
         array $messages = null
-    ): DiagnosisInterface {
-        $diagnosisMock = $this->createMock(DiagnosisInterface::class);
-        $diagnosisMock->expects(self::once())
+    ): DiagnosedInterface {
+        $diagnosedMock = $this->createMock(DiagnosedInterface::class);
+        $diagnosedMock->expects(self::once())
             ->method('setPrevious')
             ->with($previous)
             ->willReturnSelf();
 
-        $diagnosisMock->expects(self::once())
+        $diagnosedMock->expects(self::once())
             ->method('setTransient')
             ->with($transient)
             ->willReturnSelf();
 
         if (isset($code)) {
-            $diagnosisMock->expects(self::once())
+            $diagnosedMock->expects(self::once())
                 ->method('setCode')
                 ->with($code)
                 ->willReturnSelf();
         } else {
-            $diagnosisMock->expects(self::never())
+            $diagnosedMock->expects(self::never())
                 ->method('setCode');
         }
 
@@ -51,26 +51,26 @@ trait DiagnosisFactoryMockerTrait
                 // Only one argument, which is the message.
                 return [$message];
             }, $messages);
-            $diagnosisMock->expects(self::exactly(count($messages)))
+            $diagnosedMock->expects(self::exactly(count($messages)))
                 ->method('addMessage')
                 ->withConsecutive($consecutiveArgs)
                 ->willReturnSelf();
         } else {
-            $diagnosisMock->expects(self::never())
+            $diagnosedMock->expects(self::never())
                 ->method('addMessage');
         }
 
-        $this->getDiagnosisFactoryMock()
+        $this->getDiagnosedFactoryMock()
             ->expects(self::once())
             ->method('create')
-            ->willReturn($diagnosisMock);
+            ->willReturn($diagnosedMock);
 
-        return $diagnosisMock;
+        return $diagnosedMock;
     }
 
-    protected function expectNoDiagnosisCreation()
+    protected function expectNoDiagnosedCreation()
     {
-        $this->getDiagnosisFactoryMock()
+        $this->getDiagnosedFactoryMock()
             ->expects(self::never())
             ->method('create');
     }

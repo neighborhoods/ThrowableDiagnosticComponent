@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosisInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
 class NestedDiagnosticDecorator implements NestedDiagnosticDecoratorInterface
 {
     use AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
-        if ($throwable instanceof DiagnosisInterface) {
+        if ($throwable instanceof DiagnosedInterface) {
             /** @noinspection PhpUnhandledExceptionInspection */
             throw $throwable;
         }

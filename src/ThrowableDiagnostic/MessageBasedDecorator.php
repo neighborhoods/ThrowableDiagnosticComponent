@@ -5,13 +5,13 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
 use LogicException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosis;
+use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Throwable;
 
 class MessageBasedDecorator implements MessageBasedDecoratorInterface
 {
     use AwareTrait;
-    use Diagnosis\Factory\AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
 
     private /*string*/ $messagePart;
     private /*bool*/ $transient;
@@ -20,7 +20,7 @@ class MessageBasedDecorator implements MessageBasedDecoratorInterface
     {
         // Check if exception message contains message part
         if (strpos($throwable->getMessage(), $this->getMessagePart()) !== false) {
-            throw $this->getDiagnosisFactory()
+            throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient($this->isTransient())
                 ->setPrevious($throwable);

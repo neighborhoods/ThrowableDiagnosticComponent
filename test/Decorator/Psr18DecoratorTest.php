@@ -18,7 +18,7 @@ class Psr18DecoratorTest extends DecoratorTestCase
 
         $this->decorator = new Psr18Decorator();
         $this->decorator
-            ->setDiagnosisFactory($this->getDiagnosisFactoryMock())
+            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
             ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
@@ -26,7 +26,7 @@ class Psr18DecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(ClientExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -34,8 +34,8 @@ class Psr18DecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(NetworkExceptionInterface::class);
         $this->expectNoForwarding();
-        $diagnosis = $this->expectDiagnosisCreation($analysedThrowable, true);
-        $this->expectExceptionObject($diagnosis);
+        $diagnosed = $this->expectDiagnosedCreation($analysedThrowable, true);
+        $this->expectExceptionObject($diagnosed);
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -43,7 +43,7 @@ class Psr18DecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(RequestExceptionInterface::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 
@@ -51,7 +51,7 @@ class Psr18DecoratorTest extends DecoratorTestCase
     {
         $analysedThrowable = $this->createMock(Throwable::class);
         $this->expectForwarding($analysedThrowable);
-        $this->expectNoDiagnosisCreation();
+        $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
     }
 }
