@@ -19,17 +19,6 @@ Via Composer
 $ composer require neighborhoods/throwable-diagnostic-component
 ```
 
-Since this is a private package, neighborhoods.com must be registered as a composer repository. Make sure your `composer.json` has a `repositories` array in the root object with an item as shown below.
-
-``` json
-"repositories": [
-    {
-      "type": "composer",
-      "url": "https://satis.neighborhoods.com"
-    }
-  ],
-```
-
 ## Usage
 
 When catching a `Throwable` which might be transient, use the `ThrowableDiagnostic` to `diagnose` it. A `DiagnosedInterface` will be thrown wrapping the original `Throwable`.
