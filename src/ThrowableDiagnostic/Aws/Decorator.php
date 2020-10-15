@@ -17,7 +17,10 @@ final class Decorator implements DecoratorInterface
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof AwsException) {
-            $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            $transient = $throwable->isConnectionError();
+            if (!$transient && $throwable->getAwsErrorCode()) {
+                $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            }
             throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient($transient)
