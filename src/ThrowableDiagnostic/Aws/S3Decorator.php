@@ -17,7 +17,10 @@ final class S3Decorator implements S3DecoratorInterface
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof S3Exception) {
-            $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            $transient = $throwable->isConnectionError();
+            if (!$transient && $throwable->getAwsErrorCode()) {
+                $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            }
             throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient($transient)

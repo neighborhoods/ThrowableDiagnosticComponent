@@ -17,7 +17,10 @@ final class SqsDecorator implements SqsDecoratorInterface
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof SqsException) {
-            $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            $transient = $throwable->isConnectionError();
+            if (!$transient && $throwable->getAwsErrorCode()) {
+                $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            }
             throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient($transient)
