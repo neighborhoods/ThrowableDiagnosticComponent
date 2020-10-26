@@ -4,4 +4,4 @@ services:
     public: false
     shared: true
     calls:
-      - [setThrowableDiagnosticDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\GuzzleDecoratorInterface']]
+      - [setThrowableDiagnosticGuzzleDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\GuzzleDecoratorInterface']]
