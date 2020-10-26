@@ -22,7 +22,7 @@
     "ext-pdo": "*",
     "aws/aws-sdk-php": "^3",
     "doctrine/dbal": "^2",
-    "guzzle/guzzle": "^3",
+    "guzzlehttp/guzzle": "^7",
     "neighborhoods/buphalo": "^1.1",
     "neighborhoods/exception-component": "^1",
     "psr/http-client": "^1.0",
