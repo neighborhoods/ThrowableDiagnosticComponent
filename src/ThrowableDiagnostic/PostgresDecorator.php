@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
@@ -13,6 +14,9 @@ use Throwable;
 
 final class PostgresDecorator implements PostgresDecoratorInterface
 {
+    use AwareTrait;
+    use Diagnosed\Factory\AwareTrait;
+
     const TRANSIENT_SQL_STATES = [
         '40001',
         '40P01',
@@ -25,9 +29,6 @@ final class PostgresDecorator implements PostgresDecoratorInterface
             'server closed the connection unexpectedly',
         ],
     ];
-
-    use AwareTrait;
-    use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {

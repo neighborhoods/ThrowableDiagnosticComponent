@@ -6,5 +6,8 @@
     <file>template-tree</file>
     <file>test</file>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <!-- False positive constant visibility for php version 7.0 -->
+        <exclude name="PSR12.Properties.ConstantVisibility"/>
+    </rule>
 </ruleset>

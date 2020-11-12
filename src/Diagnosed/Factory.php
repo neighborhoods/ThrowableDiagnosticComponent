@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
@@ -10,6 +11,6 @@ final class Factory implements FactoryInterface
 {
     public function create(): DiagnosedInterface
     {
-        return new Diagnosed;
+        return new Diagnosed();
     }
 }

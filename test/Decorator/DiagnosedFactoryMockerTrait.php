@@ -6,7 +6,6 @@ use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use Throwable;
 
-
 trait DiagnosedFactoryMockerTrait
 {
     private $diagnosedFactoryMock;
