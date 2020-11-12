@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
@@ -32,6 +33,12 @@ final class GuzzleDecorator implements GuzzleDecoratorInterface
         // Server error 503 means service is temporarily unavailable.
         if ($throwable instanceof ServerException) {
             if ($throwable->getResponse()->getStatusCode() === 503) {
+                $isTransient = true;
+            }
+        }
+        // Client error 429 means too many requests.
+        if ($throwable instanceof ClientException) {
+            if ($throwable->getResponse()->getStatusCode() === 429) {
                 $isTransient = true;
             }
         }
