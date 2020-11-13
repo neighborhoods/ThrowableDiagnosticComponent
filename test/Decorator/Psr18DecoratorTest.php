@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Decorator;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Psr18Decorator;
 use Psr\Http\Client\ClientExceptionInterface;

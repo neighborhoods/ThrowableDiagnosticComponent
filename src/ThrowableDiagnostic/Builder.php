@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 
 use LogicException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
+// @codingStandardsIgnoreLine Line below exceeds 120 characters
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Decorator\FactoryInterface as DecoratorFactoryInterface;
 
 final class Builder implements BuilderInterface

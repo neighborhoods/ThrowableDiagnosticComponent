@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\NestedDiagnosticDecorator;
@@ -10,8 +11,9 @@ trait AwareTrait
 {
     protected $ThrowableDiagnosticNestedDiagnosticDecorator;
 
-    public function setThrowableDiagnosticNestedDiagnosticDecorator(NestedDiagnosticDecoratorInterface $NestedDiagnosticDecorator): self
-    {
+    public function setThrowableDiagnosticNestedDiagnosticDecorator(
+        NestedDiagnosticDecoratorInterface $NestedDiagnosticDecorator
+    ): self {
         if ($this->hasThrowableDiagnosticNestedDiagnosticDecorator()) {
             throw new LogicException('ThrowableDiagnosticNestedDiagnosticDecorator is already set.');
         }

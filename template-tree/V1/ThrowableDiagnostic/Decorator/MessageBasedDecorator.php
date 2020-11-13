@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\BuphaloTemplateTree;
 
-use LogicException;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
@@ -11,10 +11,10 @@ use Throwable;
 
 final class PrimaryActorName implements PrimaryActorNameInterface
 {
-    const TRANSIENT_MESSAGE_PART = 'TODO';
-
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;
+
+    const TRANSIENT_MESSAGE_PART = 'TODO';
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {

@@ -164,6 +164,84 @@ services:
       - [setThrowableDiagnosticDecorator, ['@Acme\RiskyCode\ThrowableDiagnostic\DecoratorInterface']]
 ```
 
+### Unit testing custom decorator
+
+Once the decorator is implemented you might want to test it.  
+This package unit tests implemented decorators using traits providing tailored mocks and expectations. The traits are in the `/test` folder. Composer doesn't autoload them by default. To autoload the traits and base class for Decorator tests add the following block to your "autoload-dev" section of `composer.json`:
+```json
+{
+  "autoload-dev": {
+    "files": [
+      "vendor/neighborhoods/throwable-diagnostic-component/test/Decorator/ThrowableDiagnosticMockerTrait.php",
+      "vendor/neighborhoods/throwable-diagnostic-component/test/Decorator/DiagnosedFactoryMockerTrait.php",
+      "vendor/neighborhoods/throwable-diagnostic-component/test/Decorator/DecoratorTestCase.php"
+    ],
+    "psr-4": {
+      "AcmeTest\\": [
+        "test/"
+      ]
+    }
+  }
+}
+```
+After changing `composer.json` run `composer dump-autoload` for the changes to have effect.
+
+The `DecoratorTestCase` is a [PHPUnit](https://github.com/sebastianbergmann/phpunit) `TestCase` using the `ThrowableDiagnosticMockerTrait` and `DiagnosedFactoryMockerTrait` traits. To make use of them PHPUnit must be a dev-dependency. A wide range of PHPUnit versions should be compatible with the autoloaded code.
+
+The test case for your custom decorator might look along these lines.
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace AcmeTest\Unit\RiskyCode\ThrowableDiagnostic;
+
+use Acme\RiskyCode\ThrowableDiagnostic\Decorator;
+use Neighborhoods\ThrowableDiagnosticComponentTest\Decorator\DecoratorTestCase;
+use Throwable;
+
+class DecoratorTest extends DecoratorTestCase
+{
+    protected Decorator $decorator;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->decorator = new Decorator();
+        $this->decorator
+            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+    }
+
+    public function testDiagnoseShouldThrowDiagnosedWithTransientException(): void
+    {
+        // Compose an exception which
+        // the decorator is supposed to interpret as transient.
+        $transientException = $this->createMock(...);
+        // Decorated Throwable Diagnostic shouldn't be used.
+        $this->expectNoForwarding();
+        // Injected Diagnosed Factory mock should be used
+        // to compose a Diagnosed mock expecting previous exception
+        // to match transientException and be marked as transient.
+        $diagnosedMock = $this->expectDiagnosedCreation($transientException, true);
+        // Diagnosed mock is expected to be thrown.
+        $this->expectExceptionObject($diagnosedMock);
+        $this->decorator->diagnose($transientException);
+    }
+
+    public function testForwardsDummyThrowable(): void
+    {
+        $dummyThrowable = $this->createMock(Throwable::class);
+        // Decorated Throwable Diagnostic should be used.
+        $this->expectForwarding($dummyThrowable);
+        // Injected Diagnosed Factory mock shouldn't be used
+        $this->expectNoDiagnosedCreation();
+        $this->decorator->diagnose($dummyThrowable);
+    }
+}
+```
+
 ## Buphalo integration
 
 [Buphalo](https://github.com/neighborhoods/Buphalo) templates are available for generating custom ThrowableDiagnostic Builders, Builder Factories, Decorators and Decorator files.

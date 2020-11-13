@@ -1,11 +1,10 @@
 <?php
 
-namespace Test\Decorator;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
 use Throwable;
-
 
 trait DiagnosedFactoryMockerTrait
 {

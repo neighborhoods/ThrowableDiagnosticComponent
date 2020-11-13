@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Decorator;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\SymfonyHttpClientDecorator;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;

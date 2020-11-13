@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Decorator;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\SymfonyHttpClientDecorator;
@@ -10,8 +11,9 @@ trait AwareTrait
 {
     protected $ThrowableDiagnosticSymfonyHttpClientDecorator;
 
-    public function setThrowableDiagnosticSymfonyHttpClientDecorator(SymfonyHttpClientDecoratorInterface $SymfonyHttpClientDecorator): self
-    {
+    public function setThrowableDiagnosticSymfonyHttpClientDecorator(
+        SymfonyHttpClientDecoratorInterface $SymfonyHttpClientDecorator
+    ): self {
         if ($this->hasThrowableDiagnosticSymfonyHttpClientDecorator()) {
             throw new LogicException('ThrowableDiagnosticSymfonyHttpClientDecorator is already set.');
         }

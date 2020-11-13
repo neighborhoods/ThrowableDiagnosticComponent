@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws;
@@ -18,8 +19,11 @@ final class S3Decorator implements S3DecoratorInterface
     {
         if ($throwable instanceof S3Exception) {
             $transient = $throwable->isConnectionError();
-            if (!$transient && $throwable->getAwsErrorCode()) {
-                $transient = $this->isAwsErrorCodeTransient($throwable->getAwsErrorCode());
+            if (!$transient) {
+                $errorCode = $throwable->getAwsErrorCode();
+                if ($errorCode) {
+                    $transient = $this->isAwsErrorCodeTransient($errorCode);
+                }
             }
             throw $this->getDiagnosedFactory()
                 ->create()
@@ -35,8 +39,8 @@ final class S3Decorator implements S3DecoratorInterface
     public function isAwsErrorCodeTransient(string $errorCode): bool
     {
         $transient = (strpos($errorCode, 'Throttl') !== false);
-        $transient |= (strpos($errorCode, 'ServiceUnavailable') !== false);
-        $transient |= (strpos($errorCode, 'ConcurrentAccess') !== false);
+        $transient = $transient || (strpos($errorCode, 'ServiceUnavailable') !== false);
+        $transient = $transient || (strpos($errorCode, 'ConcurrentAccess') !== false);
 
         return $transient;
     }
