@@ -15,7 +15,8 @@ final class Psr18Decorator implements Psr18DecoratorInterface
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
-        if ($throwable instanceof NetworkExceptionInterface) {
+        $transient = $throwable instanceof NetworkExceptionInterface;
+        if ($transient) {
             throw $this->getDiagnosedFactory()
                 ->create()
                 ->setTransient(true)
