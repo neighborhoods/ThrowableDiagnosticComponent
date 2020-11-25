@@ -3,3 +3,5 @@ services:
     class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\S3Decorator
     public: false
     shared: false
+    calls:
+      - [ setDiagnosedFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\Diagnosed\FactoryInterface' ] ]
