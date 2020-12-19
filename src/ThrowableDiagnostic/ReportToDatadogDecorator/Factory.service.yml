@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\ReportToDatadogDecorator\FactoryInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\ReportToDatadogDecorator\Factory
+    public: false
+    shared: true
+    calls:
+      - [setThrowableDiagnosticDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\ReportToDatadogDecoratorInterface']]
