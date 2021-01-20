@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws;
 
 use Aws\Exception\AwsException;
+use Aws\Exception\CredentialsException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
@@ -17,6 +18,16 @@ final class Decorator implements DecoratorInterface
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
+        if ($throwable instanceof CredentialsException) {
+            // Check if retrieving credentials timed out
+            // by checking if message has a specific start
+            if (strpos($throwable->getMessage(), "Error retrieving credentials from the instance profile metadata service. (cURL error 28: Operation timed out") === 0) {
+                throw $this->getDiagnosedFactory()
+                    ->create()
+                    ->setTransient(true)
+                    ->setPrevious($throwable);
+            }
+        }
         if ($throwable instanceof AwsException) {
             $transient = $throwable->isConnectionError();
             if (!$transient) {
