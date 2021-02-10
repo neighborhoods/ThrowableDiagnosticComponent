@@ -21,7 +21,7 @@ final class Decorator implements DecoratorInterface
         if ($throwable instanceof CredentialsException) {
             // Check if retrieving credentials timed out
             // by checking if message has a specific start
-            if (strpos($throwable->getMessage(), "Error retrieving credentials from the instance profile metadata service. (cURL error 28: Operation timed out") === 0) {
+            if (strpos($throwable->getMessage(), "Error retrieving credentials from the instance profile metadata service.") === 0) {
                 throw $this->getDiagnosedFactory()
                     ->create()
                     ->setTransient(true)
