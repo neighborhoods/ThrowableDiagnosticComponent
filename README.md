@@ -324,7 +324,6 @@ Prefab global config *http-buildable-directories.yml* in project root
 ```yaml
 ComponentName/DAO:
   buildable_directories:
-    - ../vendor/neighborhoods/throwable-diagnostic-component/src
     - ComponentName
   welcome_baskets:
     - Doctrine\DBAL
@@ -333,5 +332,7 @@ ComponentName/DAO:
     - NewRelic
     - Zend\Expressive
     - SearchCriteria
+ appended_paths:
+    - vendor/neighborhoods/throwable-diagnostic-component/src
 ```
 
