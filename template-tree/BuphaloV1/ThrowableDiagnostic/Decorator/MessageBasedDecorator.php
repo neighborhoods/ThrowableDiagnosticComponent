@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Neighborhoods\BuphaloTemplateTree;
 
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnosticInterface;
 use Throwable;
 
 final class PrimaryActorName implements PrimaryActorNameInterface

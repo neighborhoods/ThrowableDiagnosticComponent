@@ -251,7 +251,7 @@ class DecoratorTest extends DecoratorTestCase
 The Buphalo templates are provided in a custom template tree. Support for multiple template trees has been added to Buphalo in version 1.1. Ensure you have Buphalo version 1.1 or above installed.  
 When you run Buphalo you need to add the template tree contained in this package to the template tree directory paths. To do so make an export as shown below.
 ``` bash
-Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/throwable-diagnostic-component/template-tree/V1
+Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/throwable-diagnostic-component/template-tree/BuphaloV1
 ```
 
 The export above assumes that you have no other custom template trees.
