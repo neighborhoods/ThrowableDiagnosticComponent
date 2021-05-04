@@ -2,8 +2,8 @@
 
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\DiagnosedInterface;
 use Throwable;
 
 trait DiagnosedFactoryMockerTrait

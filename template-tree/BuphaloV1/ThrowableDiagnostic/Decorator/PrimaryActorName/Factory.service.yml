@@ -4,4 +4,4 @@ services:
     public: false
     shared: true
     calls:
-      - [setThrowableDiagnosticDecorator, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorNameInterface']]
+      - [setThrowableDiagnosticV1ThrowableDiagnosticDecorator, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorNameInterface']]

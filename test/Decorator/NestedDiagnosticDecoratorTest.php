@@ -2,8 +2,9 @@
 
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\NestedDiagnosticDecorator;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\DiagnosedInterface;
+// @codingStandardsIgnoreLine Line below exceeds 120 characters
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\NestedDiagnosticV1\NestedDiagnosticDecorator;
 use Throwable;
 
 class NestedDiagnosticDecoratorTest extends DecoratorTestCase
@@ -16,8 +17,8 @@ class NestedDiagnosticDecoratorTest extends DecoratorTestCase
 
         $this->decorator = new NestedDiagnosticDecorator();
         $this->decorator
-            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
     public function testThrowsAnalysedDiagnosed()

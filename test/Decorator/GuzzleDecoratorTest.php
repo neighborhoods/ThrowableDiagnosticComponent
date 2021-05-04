@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\GuzzleDecorator;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\GuzzleV1\GuzzleDecorator;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -21,8 +21,8 @@ class GuzzleDecoratorTest extends DecoratorTestCase
 
         $this->decorator = new GuzzleDecorator();
         $this->decorator
-            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
     public function test422ClientException()

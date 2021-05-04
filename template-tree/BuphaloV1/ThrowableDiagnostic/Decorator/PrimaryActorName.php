@@ -21,13 +21,13 @@ final class PrimaryActorName implements PrimaryActorNameInterface
         throw new \LogicException('Unimplemented custom diagnostic.');
          */
         if (false) {
-            throw $this->getDiagnosedFactory()
+            throw $this->getThrowableDiagnosticV1DiagnosedFactory()
                 ->create()
                 ->setTransient(true)
                 ->setPrevious($throwable);
         }
 
-        $this->getThrowableDiagnostic()->diagnose($throwable);
+        $this->getThrowableDiagnosticV1ThrowableDiagnostic()->diagnose($throwable);
 
         return $this;
     }

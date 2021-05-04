@@ -2,7 +2,8 @@
 
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\SymfonyHttpClientDecorator;
+// @codingStandardsIgnoreLine Line below exceeds 120 characters
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\SymfonyHttpClientV1\SymfonyHttpClientDecorator;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
@@ -24,8 +25,8 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
 
         $this->decorator = new SymfonyHttpClientDecorator();
         $this->decorator
-            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
     public function test422ClientExceptionInterface()

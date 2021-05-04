@@ -2,12 +2,9 @@
 
 A Service Agnostic Component for diagnosing `Throwables`. 
 
-
 The `ThrowableDiagnostic` can determine if a `Throwable` happened because of a permanent or transient fault (network issues, database down, 3rd party service unavailable).
 
-
-Every `Throwable` is by default considered permanent, but certain `Throwables` are known to be transient. By decorating the `ThrowableDiagnostic` with custom diagnostic logic such cases can be identified.  
-
+Every `Throwable` is by default considered permanent, but certain `Throwables` are known to be transient. By decorating the `ThrowableDiagnostic` with custom diagnostic logic such cases can be identified.
 
 `Decorators` for common cases like RDBMS and AWS are available out of the box. Implementing your own `Decorator` is straightforward. Build a decorator stack tailored to your needs and handle transient `Throwables` properly.
 
@@ -27,7 +24,7 @@ When catching a `Throwable` which might be transient, use the `ThrowableDiagnost
 <?php
 namespace Acme;
 
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic;
 use Throwable;
 
 class RiskyCode {
@@ -54,7 +51,7 @@ Handle the `Throwable` based on the diagnosed.
 <?php
 namespace Acme;
 
-use Neighborhoods\ThrowableDiagnosticComponent\DiagnosedInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\DiagnosedInterface;
 use Throwable;
 
 class AsyncJob {
@@ -78,11 +75,11 @@ Build a decorator stack tailored to your needs. An example is shown below using 
 # RiskyCode\ThrowableDiagnostic\Builder.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Builder
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\Builder
     calls:
-      - [ setThrowableDiagnosticFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\FactoryInterface' ] ]
-      - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\AWSDecorator\FactoryInterface' ] ]
-      - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\PostgresDecorator\FactoryInterface' ] ]
+      - [ setThrowableDiagnosticFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface' ] ]
+      - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\AWSDecorator\FactoryInterface' ] ]
+      - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\PostgresDecorator\FactoryInterface' ] ]
 ```
 
 Create a Factory for the preconfigured builder.
@@ -91,9 +88,9 @@ Create a Factory for the preconfigured builder.
 # RiskyCode\ThrowableDiagnostic\Builder\Factory.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\Builder\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Builder\Factory
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\Builder\Factory
     calls:
-      - [setThrowableDiagnosticBuilder, ['@Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface']]
+      - [setThrowableDiagnosticV1ThrowableDiagnosticBuilder, ['@Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface']]
 ```
 
 Inject the factory into your service.
@@ -104,20 +101,20 @@ services:
   Acme\RiskyCode:
     class: Acme\RiskyCode
     calls:
-      - [setThrowableDiagnosticBuilderFactory, ['@Acme\RiskyCode\ThrowableDiagnostic\Builder\FactoryInterface']]
+      - [setThrowableDiagnosticV1ThrowableDiagnosticBuilderFactory, ['@Acme\RiskyCode\ThrowableDiagnostic\Builder\FactoryInterface']]
 ```
 
 ## Custom decorator
 
-To properly handle `Throwables` which are specific to your own code or a package for which a decorator is not available, write your own decorator. To do so extend the `Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\DecoratorInterface` as shown below.
+To properly handle `Throwables` which are specific to your own code or a package for which a decorator is not available, write your own decorator. To do so extend the `Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\DecoratorInterface` as shown below.
 ``` php
 <?php
 namespace Acme\RiskyCode\ThrowableDiagnostic;
 
-use Neighborhoods\ThrowableDiagnosticComponent\Diagnosed;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\DecoratorInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnosticInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\DecoratorInterface;
 use Throwable;
 
 final class Decorator implements DecoratorInterface
@@ -129,13 +126,13 @@ final class Decorator implements DecoratorInterface
     {
         // TODO: Implement custom diagnostic logic
         if (false) {
-            throw $this->getDiagnosedFactory()
+            throw $this->getThrowableDiagnosticV1DiagnosedFactory()
                 ->create()
                 ->setTransient(true)
                 ->setPrevious($throwable);
         }
 
-        $this->getThrowableDiagnostic()->diagnose($throwable);
+        $this->getThrowableDiagnosticV1ThrowableDiagnostic()->diagnose($throwable);
 
         return $this;
     }
@@ -149,7 +146,7 @@ services:
   Acme\RiskyCode\ThrowableDiagnostic\DecoratorInterface:
     class: Acme\RiskyCode\ThrowableDiagnostic\Decorator
     calls:
-      - [setDiagnosedFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\Diagnosed\FactoryInterface']]
+      - [setDiagnosedFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed\FactoryInterface']]
       # Don't call setThrowableDiagnostic. The ThrowableDiagnostic is injected by the ThrowableDiagnostic builder.
 ```
 
@@ -159,9 +156,9 @@ Define a decorator factory and add it to your builder service.
 # RiskyCode\ThrowableDiagnostic\Decorator\Factory.service.yml
 services:
   Acme\RiskyCode\ThrowableDiagnostic\Decorator\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Decorator\Factory
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\Decorator\Factory
     calls:
-      - [setThrowableDiagnosticDecorator, ['@Acme\RiskyCode\ThrowableDiagnostic\DecoratorInterface']]
+      - [setThrowableDiagnosticV1ThrowableDiagnosticDecorator, ['@Acme\RiskyCode\ThrowableDiagnostic\DecoratorInterface']]
 ```
 
 ### Unit testing custom decorator
@@ -210,8 +207,8 @@ class DecoratorTest extends DecoratorTestCase
 
         $this->decorator = new Decorator();
         $this->decorator
-            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
     public function testDiagnoseShouldThrowDiagnosedWithTransientException(): void
@@ -307,6 +304,7 @@ When using a Symfony DI based container to resolve a service aware of the `Throw
 ``` php
 $proteanContainerBuilder = new Prefab5\Protean\Container\Builder();
 $proteanContainerBuilder->getDiscoverableDirectories()
+    ->addDirectoryPathFilter('../vendor/neighborhoods/throwable-diagnostic-component/fab')
     ->addDirectoryPathFilter('../vendor/neighborhoods/throwable-diagnostic-component/src');
 // Further builder configuration
 
@@ -333,6 +331,6 @@ ComponentName/DAO:
     - Zend\Expressive
     - SearchCriteria
  appended_paths:
+    - vendor/neighborhoods/throwable-diagnostic-component/fab
     - vendor/neighborhoods/throwable-diagnostic-component/src
 ```
-

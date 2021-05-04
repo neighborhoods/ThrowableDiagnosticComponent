@@ -2,7 +2,7 @@
 
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnosticInterface;
 use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
 use Throwable;
 

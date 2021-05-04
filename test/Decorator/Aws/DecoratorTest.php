@@ -3,7 +3,7 @@
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator\Aws;
 
 use Aws\Exception\CredentialsException;
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Aws\Decorator;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsV1\AwsDecorator;
 use Neighborhoods\ThrowableDiagnosticComponentTest\Decorator\DecoratorTestCase;
 use Throwable;
 
@@ -15,14 +15,15 @@ class DecoratorTest extends DecoratorTestCase
     {
         parent::setUp();
 
-        $this->decorator = new Decorator();
+        $this->decorator = new AwsDecorator();
         $this->decorator
-            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
     public function testDiagnoseThrowsTransientDiagnosedForCredentialTimeout()
     {
+        // @codingStandardsIgnoreLine Line below exceeds 120 characters
         $credentialsTimeoutException = new CredentialsException("Error retrieving credentials from the instance profile metadata service. (cURL error 28: Operation timed out after 1001 milliseconds with 0 bytes received (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for http://169.254.169.254/latest/meta-data/iam/security-credentials/nhds-huddle-service-prod)");
         $this->expectNoForwarding();
         $diagnosed = $this->expectDiagnosedCreation($credentialsTimeoutException, true);

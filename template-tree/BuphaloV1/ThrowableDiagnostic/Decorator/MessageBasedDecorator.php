@@ -25,13 +25,13 @@ final class PrimaryActorName implements PrimaryActorNameInterface
         // Check if exception message contains transient message part
         if (strpos($throwable->getMessage(), self::TRANSIENT_MESSAGE_PART) !== false) {
             /** @noinspection PhpUnhandledExceptionInspection */
-            throw $this->getDiagnosedFactory()
+            throw $this->getThrowableDiagnosticV1DiagnosedFactory()
                 ->create()
                 ->setTransient(true)
                 ->setPrevious($throwable);
         }
 
-        $this->getThrowableDiagnostic()->diagnose($throwable);
+        $this->getThrowableDiagnosticV1ThrowableDiagnostic()->diagnose($throwable);
 
         return $this;
     }

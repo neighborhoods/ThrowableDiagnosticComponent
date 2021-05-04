@@ -2,7 +2,7 @@
 
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
 
-use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Psr18Decorator;
+use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\Psr18V1\Psr18Decorator;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Client\RequestExceptionInterface;
@@ -18,8 +18,8 @@ class Psr18DecoratorTest extends DecoratorTestCase
 
         $this->decorator = new Psr18Decorator();
         $this->decorator
-            ->setDiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
     }
 
     public function testClientExceptionInterface()
