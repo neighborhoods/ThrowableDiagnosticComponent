@@ -1,10 +1,10 @@
 <?php
 
-namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator\Aws;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators\Aws;
 
 use Aws\Exception\CredentialsException;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsV1\AwsDecorator;
-use Neighborhoods\ThrowableDiagnosticComponentTest\Decorator\DecoratorTestCase;
+use Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators\DecoratorTestCase;
 use Throwable;
 
 class DecoratorTest extends DecoratorTestCase

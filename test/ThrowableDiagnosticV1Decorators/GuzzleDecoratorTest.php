@@ -1,6 +1,6 @@
 <?php
 
-namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;

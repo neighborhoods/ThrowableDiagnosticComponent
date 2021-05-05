@@ -1,6 +1,6 @@
 <?php
 
-namespace Neighborhoods\ThrowableDiagnosticComponentTest\Decorator;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators;
 
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\DiagnosedInterface;

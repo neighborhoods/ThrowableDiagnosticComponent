@@ -23,4 +23,6 @@ parameters:
 	      count: 2
 	    -
 	      message: '#If condition is always false.#'
-	      path: template-tree/BuphaloV1/ThrowableDiagnostic/Decorator/PrimaryActorName.php
+	      paths:
+	          - template-tree/BuphaloV1/ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorName.php
+	          - template-tree/BuphaloV1/ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DiagnosingDecoratorV1/PrimaryActorName.php

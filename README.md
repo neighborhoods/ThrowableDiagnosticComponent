@@ -260,12 +260,12 @@ Create the file `RiskyCode.buphalo.v1.fabrication.yml` if it doesn't already exi
 ``` yaml
 actors:
   <PrimaryActorName>/ThrowableDiagnostic/Builder.service.yml:
-    template: PrimaryActorName/ThrowableDiagnostic/Builder.service.yml
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DiagnoserV1/PrimaryActorName/ThrowableDiagnostic/Builder.service.yml
   <PrimaryActorName>/ThrowableDiagnostic/Builder/Factory.service.yml:
-    template: PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DiagnoserV1/PrimaryActorName/ThrowableDiagnostic/Builder/Factory.service.yml
 ```
 
-Modify the `PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` to composes a decorator stack tailored to `RiskyCode`. Before doing so move the file from your fabrication folder to the source folder.  
+Modify the `ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DiagnoserV1/PrimaryActorName/ThrowableDiagnostic/Builder.service.yml` to composes a decorator stack tailored to `RiskyCode`. Before doing so move the file from your fabrication folder to the source folder.  
 You still need to manually inject the fabricated builder factory into the aware service, e.g. `RiskyCode`.
 
 ### Custom decorator fabrication
@@ -275,25 +275,30 @@ If you also want a custom decorator add the `CustomDecoratorName.buphalo.v1.fabr
 ``` yaml
 actors:
   <PrimaryActorName>.php:
-    template: ThrowableDiagnostic/Decorator/PrimaryActorName.php
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorName.php
   <PrimaryActorName>.service.yml:
-    template: ThrowableDiagnostic/Decorator/PrimaryActorName.service.yml
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorName.service.yml
   <PrimaryActorName>Interface.php:
-    template: ThrowableDiagnostic/Decorator/PrimaryActorNameInterface.php
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorNameInterface.php
   <PrimaryActorName>/Factory.php:
-    template: ThrowableDiagnostic/Decorator/PrimaryActorName/Factory.php
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorName/Factory.php
   <PrimaryActorName>/Factory.service.yml:
-    template: ThrowableDiagnostic/Decorator/PrimaryActorName/Factory.service.yml
+    template: ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorName/Factory.service.yml
 ```
 
-Move the `PrimaryActorName/ThrowableDiagnostic/CustomDecoratorName.php` file from your fabrication folder to the source folder and write you custom diagnostic logic. 
+Move the `ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DiagnoserV1/PrimaryActorName/ThrowableDiagnostic/CustomDecoratorName.php` file from your fabrication folder to the source folder and write you custom diagnostic logic. 
 
 #### Decorator implementation templates
 
-Instead of the dummy decorator implementation template, more elaborate implementation templates are available. To use one of them change the template value of the `<PrimaryActorName>.php` in the `CustomDecoratorName.buphalo.v1.fabrication.yml` file.
+Instead of the dummy decorator implementation template, more elaborate implementation templates are available. To use one of them change `DecoratorV1` template path part in the `CustomDecoratorName.buphalo.v1.fabrication.yml` file.
 
 Alternatives include
-* ThrowableDiagnostic/Decorator/MessageBasedDecorator.php
+* DiagnosingDecoratorV1
+  Similar to `DecoratorV1`. It's additionally aware of the Diagnosed Factory, which gets injected.
+* MessageBasedDecoratorV1
+  Similar to `DecoratorV1`. It contains logic for checking if throwable message contains a specific substring.
+* DiagnosingMessageBasedDecoratorV1
+  Similar to `MessageBasedDecoratorV1`. It's additionally aware of the Diagnosed Factory, which gets injected.
 
 ## Protean Container
 
