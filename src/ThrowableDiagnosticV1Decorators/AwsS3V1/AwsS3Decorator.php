@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsSnsV1;
+namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsS3V1;
 
-use Aws\Sns\Exception\SnsException;
+use Aws\S3\Exception\S3Exception;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnosticInterface;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed;
 use Throwable;
 
-final class SnsDecorator implements SnsDecoratorInterface
+final class AwsS3Decorator implements AwsS3DecoratorInterface
 {
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;
 
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
-        if ($throwable instanceof SnsException) {
+        if ($throwable instanceof S3Exception) {
             $transient = $throwable->isConnectionError();
             if (!$transient) {
                 $errorCode = $throwable->getAwsErrorCode();

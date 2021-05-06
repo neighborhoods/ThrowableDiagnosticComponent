@@ -1,7 +1,0 @@
-services:
-  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsSqsV1\SqsDecorator\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsSqsV1\SqsDecorator\Factory
-    public: false
-    shared: true
-    calls:
-      - [setThrowableDiagnosticV1ThrowableDiagnosticDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsSqsV1\SqsDecoratorInterface']]

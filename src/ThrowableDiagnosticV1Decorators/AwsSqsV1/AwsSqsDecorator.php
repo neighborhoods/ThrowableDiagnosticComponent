@@ -10,7 +10,7 @@ use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDi
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed;
 use Throwable;
 
-final class SqsDecorator implements SqsDecoratorInterface
+final class AwsSqsDecorator implements AwsSqsDecoratorInterface
 {
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;

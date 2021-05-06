@@ -7,7 +7,7 @@ namespace Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decora
 // @codingStandardsIgnoreLine Line below exceeds 120 characters
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\DecoratorInterface as ThrowableDiagnosticDecoratorInterface;
 
-interface SqsDecoratorInterface extends ThrowableDiagnosticDecoratorInterface
+interface AwsSqsDecoratorInterface extends ThrowableDiagnosticDecoratorInterface
 {
 
 }
