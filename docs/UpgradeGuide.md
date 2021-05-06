@@ -26,13 +26,13 @@ To quickly switch to the new file structure run the following regex **inside** y
 cd src
 
 # fix namespaces
-grep -RiIl 'ThrowableDiagnostic\\Aws' | xargs sed -i 's/ThrowableDiagnostic\\Aws\\\(.*\)Decorator/ThrowableDiagnostic\\Aws\1Decorator/g'
-grep -RiIl 'ThrowableDiagnosticComponent\\ThrowableDiagnostic' | xargs sed -i 's/ThrowableDiagnosticComponent\\ThrowableDiagnostic\\\(.\+\)Decorator/ThrowableDiagnosticComponent\\ThrowableDiagnosticV1Decorators\\\1V1\\\1Decorator/g'
+grep -RiIl 'ThrowableDiagnostic\\Aws' | xargs sed -i 's/ThrowableDiagnostic\\Aws\\\([a-zA-Z0-9]*\)Decorator/ThrowableDiagnostic\\Aws\1Decorator/g'
+grep -RiIl 'ThrowableDiagnosticComponent\\ThrowableDiagnostic' | xargs sed -i 's/ThrowableDiagnosticComponent\\ThrowableDiagnostic\\\([a-zA-Z0-9]\+\)Decorator/ThrowableDiagnosticComponent\\ThrowableDiagnosticV1Decorators\\\1V1\\\1Decorator/g'
 grep -RiIl 'ThrowableDiagnosticComponent\\ThrowableDiagnostic' | xargs sed -i 's/ThrowableDiagnosticComponent\\\(ThrowableDiagnostic[^V]\)/ThrowableDiagnosticComponent\\ThrowableDiagnosticV1\\\1/g'
 grep -RiIl 'ThrowableDiagnosticComponent\\Diagnosed' | xargs sed -i 's/ThrowableDiagnosticComponent\\Diagnosed/ThrowableDiagnosticComponent\\ThrowableDiagnosticV1\\Diagnosed/g'
 
 # fix getters and setters from fabricated aware traits
-grep -RiIl 'etThrowableDiagnostic' | xargs sed -i 's/etThrowableDiagnostic\(.\+\)Decorator/etThrowableDiagnosticV1Decorators\1V1\1Decorator/g'
+grep -RiIl 'etThrowableDiagnostic' | xargs sed -i 's/etThrowableDiagnostic\([a-zA-Z0-9]\+\)Decorator/etThrowableDiagnosticV1Decorators\1V1\1Decorator/g'
 grep -RiIl 'etThrowableDiagnostic' | xargs sed -i 's/et\(ThrowableDiagnostic[^V]\)/etThrowableDiagnosticV1\1/g'
 grep -RiIl 'etDiagnosed' | xargs sed -i 's/etDiagnosed/etThrowableDiagnosticV1Diagnosed/g'
 
