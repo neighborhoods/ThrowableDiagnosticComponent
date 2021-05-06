@@ -29,6 +29,7 @@
     "symfony/http-client-contracts": "^2.2"
   },
   "require-dev": {
+    "neighborhoods/dependency-injection-container-builder": "^1.1",
     "phpstan/extension-installer": "^1.0",
     "phpstan/phpstan": "^0.12.54",
     "phpstan/phpstan-phpunit": "^0.12.16",

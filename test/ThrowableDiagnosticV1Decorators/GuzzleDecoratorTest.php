@@ -6,9 +6,13 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
+use Neighborhoods\DependencyInjectionContainerBuilderComponent\TinyContainerBuilder;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\GuzzleV1\GuzzleDecorator;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
+use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
 use Throwable;
 
 class GuzzleDecoratorTest extends DecoratorTestCase
@@ -118,5 +122,27 @@ class GuzzleDecoratorTest extends DecoratorTestCase
         $this->expectForwarding($analysedThrowable);
         $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
+    }
+
+    public function testBuildDecoratorFactory(): void
+    {
+        $rootPath = realpath(dirname(__DIR__, 2));
+        if ($rootPath === false) {
+            throw new RuntimeException('Absolute path of the root directory not found.');
+        }
+        $container = (new TinyContainerBuilder())
+            ->setContainerBuilder(new \Symfony\Component\DependencyInjection\ContainerBuilder())
+            ->setRootPath($rootPath)
+            ->addSourcePath('fab/ThrowableDiagnosticV1')
+            ->addSourcePath('src/ThrowableDiagnosticV1')
+            ->addSourcePath('fab/ThrowableDiagnosticV1Decorators/GuzzleV1')
+            ->addSourcePath('src/ThrowableDiagnosticV1Decorators/GuzzleV1')
+            ->makePublic(GuzzleDecorator\Factory::class . 'Interface')
+            ->addCompilerPass(new AnalyzeServiceReferencesPass())
+            ->addCompilerPass(new InlineServiceDefinitionsPass())
+            ->build();
+
+        $result = $container->get(GuzzleDecorator\Factory::class . 'Interface');
+        self::assertNotNull($result);
     }
 }

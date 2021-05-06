@@ -1,13 +1,17 @@
 <?php
 
-namespace Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators\Aws;
+namespace Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators;
 
 use Aws\Exception\CredentialsException;
+use Neighborhoods\DependencyInjectionContainerBuilderComponent\TinyContainerBuilder;
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsV1\AwsDecorator;
-use Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators\DecoratorTestCase;
+use RuntimeException;
+use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Throwable;
 
-class DecoratorTest extends DecoratorTestCase
+class AwsDecoratorTest extends DecoratorTestCase
 {
     protected $decorator;
 
@@ -37,5 +41,27 @@ class DecoratorTest extends DecoratorTestCase
         $this->expectForwarding($analysedThrowable);
         $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
+    }
+
+    public function testBuildDecoratorFactory(): void
+    {
+        $rootPath = realpath(dirname(__DIR__, 2));
+        if ($rootPath === false) {
+            throw new RuntimeException('Absolute path of the root directory not found.');
+        }
+        $container = (new TinyContainerBuilder())
+            ->setContainerBuilder(new ContainerBuilder())
+            ->setRootPath($rootPath)
+            ->addSourcePath('fab/ThrowableDiagnosticV1')
+            ->addSourcePath('src/ThrowableDiagnosticV1')
+            ->addSourcePath('fab/ThrowableDiagnosticV1Decorators/AwsV1')
+            ->addSourcePath('src/ThrowableDiagnosticV1Decorators/AwsV1')
+            ->makePublic(AwsDecorator\Factory::class . 'Interface')
+            ->addCompilerPass(new AnalyzeServiceReferencesPass())
+            ->addCompilerPass(new InlineServiceDefinitionsPass())
+            ->build();
+
+        $result = $container->get(AwsDecorator\Factory::class . 'Interface');
+        self::assertNotNull($result);
     }
 }

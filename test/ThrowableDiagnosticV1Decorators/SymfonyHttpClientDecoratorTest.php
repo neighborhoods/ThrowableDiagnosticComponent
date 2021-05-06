@@ -2,8 +2,13 @@
 
 namespace Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators;
 
+use Neighborhoods\DependencyInjectionContainerBuilderComponent\TinyContainerBuilder;
 // @codingStandardsIgnoreLine Line below exceeds 120 characters
 use Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\SymfonyHttpClientV1\SymfonyHttpClientDecorator;
+use RuntimeException;
+use Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
@@ -151,5 +156,27 @@ class SymfonyHttpClientDecoratorTest extends DecoratorTestCase
         $this->expectForwarding($analysedThrowable);
         $this->expectNoDiagnosedCreation();
         $this->decorator->diagnose($analysedThrowable);
+    }
+
+    public function testBuildDecoratorFactory(): void
+    {
+        $rootPath = realpath(dirname(__DIR__, 2));
+        if ($rootPath === false) {
+            throw new RuntimeException('Absolute path of the root directory not found.');
+        }
+        $container = (new TinyContainerBuilder())
+            ->setContainerBuilder(new ContainerBuilder())
+            ->setRootPath($rootPath)
+            ->addSourcePath('fab/ThrowableDiagnosticV1')
+            ->addSourcePath('src/ThrowableDiagnosticV1')
+            ->addSourcePath('fab/ThrowableDiagnosticV1Decorators/SymfonyHttpClientV1')
+            ->addSourcePath('src/ThrowableDiagnosticV1Decorators/SymfonyHttpClientV1')
+            ->makePublic(SymfonyHttpClientDecorator\Factory::class . 'Interface')
+            ->addCompilerPass(new AnalyzeServiceReferencesPass())
+            ->addCompilerPass(new InlineServiceDefinitionsPass())
+            ->build();
+
+        $result = $container->get(SymfonyHttpClientDecorator\Factory::class . 'Interface');
+        self::assertNotNull($result);
     }
 }
