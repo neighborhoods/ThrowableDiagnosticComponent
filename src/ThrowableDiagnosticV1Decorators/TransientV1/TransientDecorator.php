@@ -15,10 +15,6 @@ final class TransientDecorator implements TransientDecoratorInterface
     use ThrowableDiagnostic\AwareTrait;
     use Diagnosed\Factory\AwareTrait;
 
-    /**
-     * @todo - consider removing this class later since the Exception Component should be replaced by
-     * this system.
-     */
     public function diagnose(Throwable $throwable): ThrowableDiagnosticInterface
     {
         if ($throwable instanceof TransientExceptionInterface) {
