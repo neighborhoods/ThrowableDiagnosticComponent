@@ -1,5 +1,5 @@
 services:
-  Neighborhoods\ThrowableDiagnosticComponent\Diagnosed\FactoryInterface:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed\FactoryInterface:
     class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed\Factory
     public: false
     shared: true
