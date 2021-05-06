@@ -1,0 +1,11 @@
+fab/* linguist-generated=true
+
+bin/buphalo export-ignore
+*.buphalo.v1.fabrication.yml export-ignore
+
+.gitattributes export-ignore
+.gitignore export-ignore
+CODEOWNERS export-ignore
+phpcs.xml export-ignore
+phpstan.neon export-ignore
+phpunit.xml.dist export-ignore
