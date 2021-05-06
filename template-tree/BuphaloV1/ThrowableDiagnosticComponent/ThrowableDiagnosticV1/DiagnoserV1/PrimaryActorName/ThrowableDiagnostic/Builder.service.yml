@@ -4,7 +4,7 @@ services:
     public: false
     shared: false
     calls:
-      - [setThrowableDiagnosticFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface']]
+      - [setThrowableDiagnosticV1ThrowableDiagnosticFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface']]
       # Add predefined decorator(s) as shown below
       #- [addFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\<__TODO__>Decorator\FactoryInterface']]
 
