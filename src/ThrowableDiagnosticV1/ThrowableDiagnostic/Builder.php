@@ -23,7 +23,7 @@ final class Builder implements BuilderInterface
         foreach ($this->decoratorFactories as $decoratorFactory) {
             $ThrowableDiagnostic = $decoratorFactory
                 ->create()
-                ->setThrowableDiagnostic($ThrowableDiagnostic);
+                ->setThrowableDiagnosticV1ThrowableDiagnostic($ThrowableDiagnostic);
         }
 
         return $ThrowableDiagnostic;
