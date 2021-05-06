@@ -20,7 +20,7 @@ class NestedDiagnosticDecoratorTest extends TestCase
 
         $this->decorator = new NestedDiagnosticDecorator();
         $this->decorator
-            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticV1ThrowableDiagnosticMock());
     }
 
     public function testThrowsAnalysedDiagnosed()

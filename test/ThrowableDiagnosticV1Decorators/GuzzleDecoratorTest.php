@@ -21,8 +21,8 @@ class GuzzleDecoratorTest extends DecoratorTestCase
 
         $this->decorator = new GuzzleDecorator();
         $this->decorator
-            ->setThrowableDiagnosticV1DiagnosedFactory($this->getDiagnosedFactoryMock())
-            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticMock());
+            ->setThrowableDiagnosticV1DiagnosedFactory($this->getThrowableDiagnosticV1DiagnosedFactoryMock())
+            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticV1ThrowableDiagnosticMock());
     }
 
     public function test422ClientException()

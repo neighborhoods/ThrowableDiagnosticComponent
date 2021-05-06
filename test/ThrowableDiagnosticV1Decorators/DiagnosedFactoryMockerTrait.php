@@ -10,7 +10,7 @@ trait DiagnosedFactoryMockerTrait
 {
     private $diagnosedFactoryMock;
 
-    protected function getDiagnosedFactoryMock()
+    protected function getThrowableDiagnosticV1DiagnosedFactoryMock()
     {
         if (!isset($this->diagnosedFactoryMock)) {
             $this->diagnosedFactoryMock = $this->createMock(Diagnosed\FactoryInterface::class);
@@ -59,7 +59,7 @@ trait DiagnosedFactoryMockerTrait
                 ->method('addMessage');
         }
 
-        $this->getDiagnosedFactoryMock()
+        $this->getThrowableDiagnosticV1DiagnosedFactoryMock()
             ->expects(self::once())
             ->method('create')
             ->willReturn($diagnosedMock);
@@ -69,7 +69,7 @@ trait DiagnosedFactoryMockerTrait
 
     protected function expectNoDiagnosedCreation()
     {
-        $this->getDiagnosedFactoryMock()
+        $this->getThrowableDiagnosticV1DiagnosedFactoryMock()
             ->expects(self::never())
             ->method('create');
     }
