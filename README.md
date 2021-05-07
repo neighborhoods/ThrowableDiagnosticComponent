@@ -16,7 +16,7 @@ Via Composer
 $ composer require neighborhoods/throwable-diagnostic-component
 ```
 
-###Versioning
+### Versioning
 
 Don't confuse releases on [packagist](https://packagist.org/packages/neighborhoods/throwable-diagnostic-component), e.g. 3.0.0, with versions of components contained within this package, e.g. AwsSqsV1. One release may contain multiple versions of the same component.  
 Parts of your code may use older versions of components, while others use the latest.
@@ -50,7 +50,7 @@ For usage details and list of predefined decorators please refer to the correspo
 ### Prerequisites
 
 The Buphalo templates are provided in a custom template tree. Support for multiple template trees has been added to Buphalo in version 1.1. Ensure you have Buphalo version 1.1 or above installed.  
-You probably have a script in your project's bin folder running vendor/bin/buphalo with all the needed environment variables. Edit the environment variable for template tree directory paths to include the template tree contained in this package. The environment variable definition might be as below.
+You probably have a script in your project's bin folder running `vendor/bin/buphalo` with all the needed environment variables. Edit the environment variable for template tree directory paths to include the template tree contained in this package. The environment variable definition might be as below.
 ```bash
 Neighborhoods_Buphalo_V1_TemplateTree_Map_Builder_FactoryInterface__TemplateTreeDirectoryPaths=default:$PWD/vendor/neighborhoods/buphalo/template-tree/V1,diagnostic:$PWD/vendor/neighborhoods/throwable-diagnostic-component/template-tree/BuphaloV1
 ```

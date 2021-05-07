@@ -1,7 +1,7 @@
 # AWS S3 V1
 This Throwable Diagnostic Decorator diagnoses AWS S3 specific exceptions.
 
-Since S3 relies on AWS in general the AWS decorator has to be also used.
+Since S3 relies on AWS in general the [AwsDecorator](../AwsV1/README.md) has to be also used.
 
 ## Paths
 As usual the DI service definition are located in the corresponding source and fabrication subfolders.

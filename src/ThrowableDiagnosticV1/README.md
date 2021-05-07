@@ -88,7 +88,7 @@ services:
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\PostgresV1\PostgresDecorator\FactoryInterface' ] ]
 ```
 
-Create a Factory for the preconfigured builder.
+Define a `Factory` for the preconfigured builder.
 
 ```yaml
 # RiskyCode\ThrowableDiagnostic\Builder\Factory.service.yml
@@ -99,7 +99,7 @@ services:
       - [setThrowableDiagnosticV1ThrowableDiagnosticBuilder, ['@Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface']]
 ```
 
-Inject the factory into your service.
+Inject the `Factory` into your service.
 
 ```yaml
 # RiskyCode.service.yml
@@ -145,7 +145,7 @@ final class Decorator implements DecoratorInterface
 }
 ```
 
-Use Symfony DI to inject the Diagnosed factory.
+Use Symfony DI to inject the `Diagnosed` factory.
 ```yaml
 # RiskyCode\ThrowableDiagnostic\Decorator.service.yml
 services:
@@ -156,7 +156,7 @@ services:
       # Don't call setThrowableDiagnostic. The ThrowableDiagnostic is injected by the ThrowableDiagnostic builder.
 ```
 
-Define a decorator factory and add it to your throwable diagnostic builder service.
+Define a decorator `Factory` and add it to your throwable diagnostic builder service.
 
 ```yaml
 # RiskyCode\ThrowableDiagnostic\Decorator\Factory.service.yml
@@ -291,12 +291,12 @@ Move the fabricated `CustomDecoratorName.php` file from your fabrication folder 
 Instead of the dummy decorator implementation template, more elaborate implementation templates are available. To use one of them change `DecoratorV1` template path part in the `CustomDecoratorName.buphalo.v1.fabrication.yml` file.
 
 Alternatives include
-* DiagnosingDecoratorV1
-  Similar to `DecoratorV1`. It's additionally aware of the Diagnosed Factory, which gets injected.
-* MessageBasedDecoratorV1
-  Similar to `DecoratorV1`. It contains logic for checking if throwable message contains a specific substring.
-* DiagnosingMessageBasedDecoratorV1
-  Similar to `MessageBasedDecoratorV1`. It's additionally aware of the Diagnosed Factory, which gets injected.
+* **DiagnosingDecoratorV1**  
+  Similar to *DecoratorV1*. It's additionally aware of the `Diagnosed` factory, which gets injected.
+* **MessageBasedDecoratorV1**  
+  Similar to *DecoratorV1*. It contains logic for checking if throwable message contains a specific substring.
+* **DiagnosingMessageBasedDecoratorV1**  
+  Similar to *MessageBasedDecoratorV1*. It's additionally aware of the `Diagnosed` factory, which gets injected.
 
 ## Container Building
 
