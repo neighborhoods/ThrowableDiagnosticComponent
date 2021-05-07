@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\ReportToDatadogDecoratorInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\ReportToDatadogDecorator
+    public: false
+    shared: false
+    calls:
+      - [setGlobalTracerRepository, ['@Neighborhoods\DatadogComponent\GlobalTracer\RepositoryInterface']]
