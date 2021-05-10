@@ -1,7 +1,0 @@
-services:
-  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\GuzzleDecorator\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\GuzzleDecorator\Factory
-    public: false
-    shared: true
-    calls:
-      - [setThrowableDiagnosticGuzzleDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\GuzzleDecoratorInterface']]

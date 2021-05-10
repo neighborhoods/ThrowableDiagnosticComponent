@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Builder\FactoryInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\Builder\Factory
+    public: false
+    shared: true
+    calls:
+      - [setThrowableDiagnosticV1ThrowableDiagnosticBuilder, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\BuilderInterface']]

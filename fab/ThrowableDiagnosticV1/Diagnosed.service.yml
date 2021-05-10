@@ -1,0 +1,5 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\DiagnosedInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\Diagnosed
+    public: false
+    shared: false

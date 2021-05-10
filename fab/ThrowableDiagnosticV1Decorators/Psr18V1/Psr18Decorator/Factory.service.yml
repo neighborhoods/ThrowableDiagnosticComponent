@@ -1,0 +1,7 @@
+services:
+  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\Psr18V1\Psr18Decorator\FactoryInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\Psr18V1\Psr18Decorator\Factory
+    public: false
+    shared: true
+    calls:
+      - [setThrowableDiagnosticV1ThrowableDiagnosticDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\Psr18V1\Psr18DecoratorInterface']]

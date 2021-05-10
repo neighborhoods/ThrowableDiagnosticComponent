@@ -1,0 +1,12 @@
+services:
+  Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\BuilderInterface:
+    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\Builder
+    public: false
+    shared: false
+    calls:
+      - [setThrowableDiagnosticV1ThrowableDiagnosticFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface']]
+      # Add predefined decorator(s) as shown below
+      #- [addFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\<__TODO__>Decorator\FactoryInterface']]
+
+      # Uncomment next line if you have a custom decorator.
+      #- [addFactory, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Decorator\FactoryInterface']]

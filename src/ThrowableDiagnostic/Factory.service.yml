@@ -1,7 +1,0 @@
-services:
-  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\Factory
-    public: false
-    shared: true
-    calls:
-      - [setThrowableDiagnostic, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticInterface']]

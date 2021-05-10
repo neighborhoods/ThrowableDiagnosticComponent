@@ -1,7 +1,0 @@
-services:
-  Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\TransientDecorator\FactoryInterface:
-    class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\TransientDecorator\Factory
-    public: false
-    shared: true
-    calls:
-      - [setThrowableDiagnosticTransientDecorator, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnostic\TransientDecoratorInterface']]

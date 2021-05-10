@@ -9,18 +9,20 @@ parameters:
 		- test
 		- template-tree
 	ignoreErrors:
-	    - '#Parameter \#1 \$exception of method PHPUnit\\Framework\\TestCase::expectExceptionObject\(\) expects Exception, Neighborhoods\\ThrowableDiagnosticComponent\\DiagnosedInterface given.#'
-	    - '#Parameter \#1 \$exception of method PHPUnit\\Framework\\TestCase::expectExceptionObject\(\) expects Exception, Neighborhoods\\ThrowableDiagnosticComponent\\DiagnosedInterface&PHPUnit\\Framework\\MockObject\\MockObject given.#'
+	    - '#Parameter \#1 \$exception of method PHPUnit\\Framework\\TestCase::expectExceptionObject\(\) expects Exception, Neighborhoods\\ThrowableDiagnosticComponent\\ThrowableDiagnosticV1\\DiagnosedInterface given.#'
+	    - '#Parameter \#1 \$exception of method PHPUnit\\Framework\\TestCase::expectExceptionObject\(\) expects Exception, Neighborhoods\\ThrowableDiagnosticComponent\\ThrowableDiagnosticV1\\DiagnosedInterface&PHPUnit\\Framework\\MockObject\\MockObject given.#'
 	    - '#Property .*::\$.* has no typehint specified.#'
 	    - '#Method .*::.*\(\) has no return typehint specified.#'
 	    -
 	      message: '#Unreachable statement - code above always terminates.#'
-	      path: src/ThrowableDiagnostic.php
+	      path: src/ThrowableDiagnosticV1/ThrowableDiagnostic.php
 	      count: 1
 	    -
 	      message: '#Unreachable statement - code above always terminates.#'
-	      path: src/ThrowableDiagnostic/PostgresDecorator.php
+	      path: src/ThrowableDiagnosticV1Decorators/PostgresV1/PostgresDecorator.php
 	      count: 2
 	    -
 	      message: '#If condition is always false.#'
-	      path: template-tree/V1/ThrowableDiagnostic/Decorator/PrimaryActorName.php
+	      paths:
+	          - template-tree/BuphaloV1/ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DecoratorV1/PrimaryActorName.php
+	          - template-tree/BuphaloV1/ThrowableDiagnosticComponent/ThrowableDiagnosticV1/DiagnosingDecoratorV1/PrimaryActorName.php
