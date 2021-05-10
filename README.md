@@ -31,7 +31,7 @@ Components fall into one of two categories
 * Throwable Diagnostic
 * Throwable Diagnostic Decorator
 
-The Throwable Diagnostic entails the concept of how this works. The Throwable Diagnostic mostly contains interfaces. It determines how user code diagnoses a Throwable, how the decorators look like, how to define the stack of decorators to be used. You may think of it as a framework/skeleton/scaffolding.  
+The Throwable Diagnostic defines the core concept of how this works. The Throwable Diagnostic mostly contains interfaces. It determines how user code diagnoses a Throwable, how the decorators look, and how to define the stack of decorators to be used. You may think of it as a framework/skeleton/scaffolding.  
 There might be multiple versions of throwable diagnostic, e.g. ThrowableDiagnosticV1 and ThrowableDiagnosticV2.
 
 A Throwable Diagnostic Decorator is in charge to diagnose certain `Throwables`. For example the `GuzzleV1` component has a decorator which decides if an exception originating from guzzle is transient or not. During the diagnostic process a `Throwable` can be inspected by multiple decorators, each of which may decide that the `Throwable` is transient, permanent or should be passed to the next decorator.
