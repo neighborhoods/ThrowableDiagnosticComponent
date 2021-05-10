@@ -36,7 +36,7 @@ There might be multiple versions of throwable diagnostic, e.g. ThrowableDiagnost
 
 A Throwable Diagnostic Decorator is in charge of diagnosing certain `Throwables`. For example, the `GuzzleV1` component has a decorator which decides if an exception originating from guzzle is transient or not. During the diagnostic process a `Throwable` can be inspected by multiple decorators, each of which may decide that the `Throwable` is transient, permanent, or should be passed to the next decorator.
 A throwable diagnostic decorator is made for a specific version of Throwable Diagnostic. All decorators compatible with ThrowableDiagnosticV1 are placed in the `src/ThrowableDiagnosticV1Decorators` folder.  
-There are decorators for different `Throwables`. Diagnostic logic for certain `Throwables` may have multiple versions, e.g. GuzzleV1, GuzzleV2. Use the latest version if possible.  
+There are decorators for different `Throwables`. Diagnostic logic for certain `Throwables` may have multiple versions, e.g. GuzzleV1, GuzzleV2. Use the latest version if possible. The versions here do not correspond to versions of guzzle, rather versions of the specific decorator.
 You can implement your own decorator to properly handle `Throwables` which are specific to your own code, or a package for which a decorator is not available.
 
 For usage details and list of predefined decorators please refer to the corresponding Throwable Diagnostic version.
