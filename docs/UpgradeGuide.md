@@ -40,7 +40,7 @@ grep -RiIl 'etDiagnosed' | xargs sed -i 's/etDiagnosed/etThrowableDiagnosticV1Di
 grep -RiIl 'throwable-diagnostic-component' | xargs sed -i 's/^\(.*vendor\/neighborhoods\/throwable-diagnostic-component\)\/src\(.*\)$/\1\/fab\2\n\1\/src\2/g'
 
 #fix buphalo templates
-grep -RiIl 'template: ThrowableDiagnostic\/Decorator\/MessageBasedDecorator' | grep \.buphalo\.v1\.fabrication\.yml$ | xargs sed -i 's/template: ThrowableDiagnostic\/Decorator\/MessageBasedDecorator/template: ThrowableDiagnosticComponent\/ThrowableDiagnosticV1\/DiagnosingMessageBasedDecoratorV1\/PrimaryActorName/g'
+grep -RiIl 'template: ThrowableDiagnostic\/Decorator\/MessageBasedDecorator' | grep \.buphalo\.v1\.fabrication\.yml$ | xargs sed -i 's/template: ThrowableDiagnostic\/Decorator\/MessageBasedDecorator/template: ThrowableDiagnosticComponent\/ThrowableDiagnosticV1\/MessageBasedDiagnosingDecoratorV1\/PrimaryActorName/g'
 grep -RiIl 'template: ThrowableDiagnostic\/Decorator\/PrimaryActorName' | grep \.buphalo\.v1\.fabrication\.yml$ | xargs sed -i 's/template: ThrowableDiagnostic\/Decorator\/PrimaryActorName/template: ThrowableDiagnosticComponent\/ThrowableDiagnosticV1\/DiagnosingDecoratorV1\/PrimaryActorName/g'
 grep -RiIl 'template: PrimaryActorName\/ThrowableDiagnostic\/' | grep \.buphalo\.v1\.fabrication\.yml$ | xargs sed -i 's/template: PrimaryActorName\/ThrowableDiagnostic\//template: ThrowableDiagnosticComponent\/ThrowableDiagnosticV1\/DiagnoserV1\/PrimaryActorName\/ThrowableDiagnostic\//g'
 
