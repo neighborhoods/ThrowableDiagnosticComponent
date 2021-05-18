@@ -50,6 +50,11 @@ cd ..
 Review the changes after running the commands. Having a clean git repository will make it easier.  
 
 Since version 4 the code is split in source and fabricated. Container builders will need to include both. The command above will modify the container builder code, but the result might need additional changes.
+In case you use *http-buildable-directories.yml* update the paths in it as well.
+
+```bash
+sed -i 's/^\(.*vendor\/neighborhoods\/throwable-diagnostic-component\)\/src\(.*\)$/\1\/fab\2\n\1\/src\2/g' http-buildable-directories.yml
+```
 
 Buphalo fabricated files, but before that update the path to the template tree.
 ```bash
@@ -63,4 +68,4 @@ If your tests use the test helpers step into the test folder and run the command
 grep -RiIl 'ThrowableDiagnosticComponentTest\\Decorator' | xargs sed -i 's/ThrowableDiagnosticComponentTest\\Decorator/ThrowableDiagnosticComponentTest\\ThrowableDiagnosticV1Decorators/g'
 ```
 
-The migration should be complete. Run tests to see if there are any missed places or anything changed which wasn't supposed to.
+The migration should be complete. Run tests to see if there are any missed places or anything changed which wasn't supposed to. Try to prime the HTTP containers.
