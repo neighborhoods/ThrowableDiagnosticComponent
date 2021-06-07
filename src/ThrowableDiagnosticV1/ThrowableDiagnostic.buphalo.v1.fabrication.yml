@@ -17,14 +17,10 @@ actors:
     template: PrimaryActorName/Factory/AwareTrait.php
   <PrimaryActorName>/Builder.php:
     template: PrimaryActorName/Builder.php
-  <PrimaryActorName>/Builder.service.yml:
-    template: PrimaryActorName/Builder.service.yml
   <PrimaryActorName>/BuilderInterface.php:
     template: PrimaryActorName/BuilderInterface.php
   <PrimaryActorName>/Builder/AwareTrait.php:
     template: PrimaryActorName/Builder/AwareTrait.php
-  <PrimaryActorName>/Builder/Factory.service.yml:
-    template: PrimaryActorName/Builder/Factory.service.yml
   <PrimaryActorName>/Builder/Factory.php:
     template: PrimaryActorName/Builder/Factory.php
   <PrimaryActorName>/Builder/FactoryInterface.php:
