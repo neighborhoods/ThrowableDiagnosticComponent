@@ -6,7 +6,7 @@ services:
     calls:
       - [setThrowableDiagnosticV1ThrowableDiagnosticFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface']]
       # Add predefined decorator(s) as shown below
-      #- [addFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\<__TODO__>Decorator\FactoryInterface']]
+      #- [addFactory, ['@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\DecoratorNameVX\<__TODO__>Decorator\FactoryInterface']]
 
       # Uncomment next line if you have a custom decorator.
       #- [addFactory, ['@Neighborhoods\BuphaloTemplateTree\PrimaryActorName\ThrowableDiagnostic\Decorator\FactoryInterface']]
