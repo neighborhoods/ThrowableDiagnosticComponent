@@ -304,23 +304,13 @@ When using a Symfony DI based container to resolve a service aware of the `Throw
 
 ```php
 // Discover used predefined service definitions
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/AwsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/AwsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/PostgresV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/PostgresV1'
+$containerBuilder
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/AwsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/AwsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/PostgresV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/PostgresV1'
 );
 $container = $containerBuilder->build();
 $riskyCode = $container->get(RiskyCode::class);

@@ -8,22 +8,11 @@ As usual the DI service definition are located in the corresponding source and f
 
 Some of these services depend on services defined in ThrowableDiagnosticV1. Therefore, those paths are also required.
 ```php
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/kojo-worker-decorator-component/fab/ThrowableDiagnosticV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/kojo-worker-decorator-component/src/ThrowableDiagnosticV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/kojo-worker-decorator-component/fab/ThrowableDiagnosticV1Decorators/AwsSqsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/kojo-worker-decorator-component/src/ThrowableDiagnosticV1Decorators/AwsSqsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/kojo-worker-decorator-component/fab/ThrowableDiagnosticV1Decorators/AwsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/kojo-worker-decorator-component/src/ThrowableDiagnosticV1Decorators/AwsV1'
-);
+$containerBuilder
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/AwsSqsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/AwsSqsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/AwsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/AwsV1');
 ```
