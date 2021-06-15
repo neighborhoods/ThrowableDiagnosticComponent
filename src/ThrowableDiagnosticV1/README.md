@@ -15,6 +15,7 @@ Following decorators are available out of the box.
 * [AwsV1](../ThrowableDiagnosticV1Decorators/AwsV1/README.md)
 * [GuzzleV1](../ThrowableDiagnosticV1Decorators/GuzzleV1/README.md)
 * [NestedDiagnosticV1](../ThrowableDiagnosticV1Decorators/NestedDiagnosticV1/README.md)
+* [PhpUnitV1](../../test/ThrowableDiagnosticV1Decorators/PhpUnitV1/README.md)
 * [PostgresV1](../ThrowableDiagnosticV1Decorators/PostgresV1/README.md)
 * [Psr18V1](../ThrowableDiagnosticV1Decorators/Psr18V1/README.md)
 * [SymfonyHttpClientV1](../ThrowableDiagnosticV1Decorators/SymfonyHttpClientV1/README.md)
@@ -342,3 +343,7 @@ ComponentName/DAO:
     - vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/PostgresV1
     - vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/PostgresV1
 ```
+
+## PHPUnit integration
+
+Use [PhpUnitV1](../../test/ThrowableDiagnosticV1Decorators/PhpUnitV1/README.md) to integrate with PHPUnit. 
