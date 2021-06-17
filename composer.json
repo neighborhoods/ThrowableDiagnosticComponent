@@ -37,6 +37,9 @@
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "^3.5"
   },
+  "suggest": {
+    "neighborhoods/throwable-diagnostic-phpunit-component": "Testing utilities"
+  },
   "autoload": {
     "psr-4": {
       "Neighborhoods\\ThrowableDiagnosticComponent\\": [
