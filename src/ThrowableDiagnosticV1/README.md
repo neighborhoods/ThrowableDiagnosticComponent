@@ -170,80 +170,7 @@ services:
 ### Unit testing custom decorator
 
 Once the decorator is implemented you might want to test it.  
-This package unit tests implemented decorators using traits providing tailored mocks and expectations. The traits are in the `/test` folder. Composer doesn't autoload them by default. To autoload the traits and base class for Decorator tests add the following block to your "autoload-dev" section of `composer.json`:
-```json
-{
-  "autoload-dev": {
-    "files": [
-      "vendor/neighborhoods/throwable-diagnostic-component/test/ThrowableDiagnosticV1Decorators/ThrowableDiagnosticMockerTrait.php",
-      "vendor/neighborhoods/throwable-diagnostic-component/test/ThrowableDiagnosticV1Decorators/DiagnosedFactoryMockerTrait.php",
-      "vendor/neighborhoods/throwable-diagnostic-component/test/ThrowableDiagnosticV1Decorators/DecoratorTestCase.php"
-    ],
-    "psr-4": {
-      "AcmeTest\\": [
-        "test/"
-      ]
-    }
-  }
-}
-```
-After changing `composer.json` run `composer dump-autoload` for the changes to have effect.
-
-The `DecoratorTestCase` is a [PHPUnit](https://github.com/sebastianbergmann/phpunit) `TestCase` using the `ThrowableDiagnosticMockerTrait` and `DiagnosedFactoryMockerTrait` traits. To make use of them PHPUnit must be a dev-dependency. A wide range of PHPUnit versions should be compatible with the autoloaded code.
-
-The test case for your custom decorator might look along these lines.
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace AcmeTest\Unit\RiskyCode\ThrowableDiagnostic;
-
-use Acme\RiskyCode\ThrowableDiagnostic\Decorator;
-use Neighborhoods\ThrowableDiagnosticComponentTest\ThrowableDiagnosticV1Decorators\DecoratorTestCase;
-use Throwable;
-
-class DecoratorTest extends DecoratorTestCase
-{
-    protected Decorator $decorator;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->decorator = new Decorator();
-        $this->decorator
-            ->setThrowableDiagnosticV1DiagnosedFactory($this->getThrowableDiagnosticV1DiagnosedFactoryMock())
-            ->setThrowableDiagnosticV1ThrowableDiagnostic($this->getThrowableDiagnosticV1ThrowableDiagnosticMock());
-    }
-
-    public function testDiagnoseShouldThrowDiagnosedWithTransientException(): void
-    {
-        // Compose an exception which
-        // the decorator is supposed to interpret as transient.
-        $transientException = $this->createMock(...);
-        // Decorated Throwable Diagnostic shouldn't be used.
-        $this->expectNoForwarding();
-        // Injected Diagnosed Factory mock should be used
-        // to compose a Diagnosed mock expecting previous exception
-        // to match transientException and be marked as transient.
-        $diagnosedMock = $this->expectDiagnosedCreation($transientException, true);
-        // Diagnosed mock is expected to be thrown.
-        $this->expectExceptionObject($diagnosedMock);
-        $this->decorator->diagnose($transientException);
-    }
-
-    public function testForwardsDummyThrowable(): void
-    {
-        $dummyThrowable = $this->createMock(Throwable::class);
-        // Decorated Throwable Diagnostic should be used.
-        $this->expectForwarding($dummyThrowable);
-        // Injected Diagnosed Factory mock shouldn't be used
-        $this->expectNoDiagnosedCreation();
-        $this->decorator->diagnose($dummyThrowable);
-    }
-}
-```
+The [Throwable Diagnostic PHPUnit Component](https://github.com/neighborhoods/ThrowableDiagnosticPHPUnitComponent) provides tailored mocks and expectations for unit testing custom decorators.
 
 ## Buphalo integration
 
@@ -304,23 +231,13 @@ When using a Symfony DI based container to resolve a service aware of the `Throw
 
 ```php
 // Discover used predefined service definitions
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/AwsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/AwsV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/PostgresV1'
-);
-$containerBuilder->addSourcePath(
-    'vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/PostgresV1'
+$containerBuilder
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/AwsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/AwsV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/PostgresV1')
+    ->addSourcePath('vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/PostgresV1'
 );
 $container = $containerBuilder->build();
 $riskyCode = $container->get(RiskyCode::class);
@@ -352,3 +269,7 @@ ComponentName/DAO:
     - vendor/neighborhoods/throwable-diagnostic-component/fab/ThrowableDiagnosticV1Decorators/PostgresV1
     - vendor/neighborhoods/throwable-diagnostic-component/src/ThrowableDiagnosticV1Decorators/PostgresV1
 ```
+
+## PHPUnit integration
+
+Use [Throwable Diagnostic PHPUnit Component](https://github.com/neighborhoods/ThrowableDiagnosticPHPUnitComponent) to integrate with PHPUnit. 
