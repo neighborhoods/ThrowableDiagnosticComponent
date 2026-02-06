@@ -83,7 +83,7 @@ services:
   Acme\RiskyCode\ThrowableDiagnostic\BuilderInterface:
     class: Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\Builder
     calls:
-      - [ setThrowableDiagnosticFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface' ] ]
+      - [ setThrowableDiagnosticV1ThrowableDiagnosticFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1\ThrowableDiagnostic\FactoryInterface' ] ]
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\AwsV1\AwsDecorator\FactoryInterface' ] ]
       - [ addFactory, [ '@Neighborhoods\ThrowableDiagnosticComponent\ThrowableDiagnosticV1Decorators\PostgresV1\PostgresDecorator\FactoryInterface' ] ]
 ```
