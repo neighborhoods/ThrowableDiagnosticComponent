@@ -23,7 +23,8 @@ final class GuzzleDecorator implements GuzzleDecoratorInterface
         $isTransient = false;
 
         // networking error (connection timeout, DNS errors, etc.)
-        // Don't use instaceof, because other exceptions extend this one.
+        // Don't use instanceof: in Guzzle 7 ConnectException/BadResponseException extend RequestException;
+        // in Guzzle 8 ConnectException was moved to extend TransferException directly.
         if (get_class($throwable) === RequestException::class) {
             $isTransient = true;
         }
